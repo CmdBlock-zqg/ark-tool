@@ -1,0 +1,853 @@
+{
+  "1": {
+    "itemId": "3131",
+    "count": 1,
+    "goldCost": 800,
+    "costs": [
+      {
+        "id": "3112",
+        "count": 2,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "2": {
+    "itemId": "3132",
+    "count": 1,
+    "goldCost": 2400,
+    "costs": [
+      {
+        "id": "3113",
+        "count": 2,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "3": {
+    "itemId": "3133",
+    "count": 1,
+    "goldCost": 7200,
+    "costs": [
+      {
+        "id": "3114",
+        "count": 2,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "4": {
+    "itemId": "3113",
+    "count": 1,
+    "goldCost": 0,
+    "costs": [
+      {
+        "id": "3112",
+        "count": 3,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "5": {
+    "itemId": "3114",
+    "count": 1,
+    "goldCost": 0,
+    "costs": [
+      {
+        "id": "3113",
+        "count": 3,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "6": {
+    "itemId": "3401",
+    "count": 4,
+    "goldCost": 200,
+    "costs": [
+      {
+        "id": "3112",
+        "count": 1,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "7": {
+    "itemId": "3401",
+    "count": 8,
+    "goldCost": 200,
+    "costs": [
+      {
+        "id": "3113",
+        "count": 1,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "8": {
+    "itemId": "3401",
+    "count": 12,
+    "goldCost": 200,
+    "costs": [
+      {
+        "id": "3114",
+        "count": 1,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "9": {
+    "itemId": "3401",
+    "count": 8,
+    "goldCost": 0,
+    "costs": [
+      {
+        "id": "3131",
+        "count": 1,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "10": {
+    "itemId": "3401",
+    "count": 16,
+    "goldCost": 0,
+    "costs": [
+      {
+        "id": "3132",
+        "count": 1,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "11": {
+    "itemId": "3401",
+    "count": 24,
+    "goldCost": 0,
+    "costs": [
+      {
+        "id": "3133",
+        "count": 1,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "12": {
+    "itemId": "30135",
+    "count": 1,
+    "goldCost": 400,
+    "costs": [
+      {
+        "id": "30084",
+        "count": 1,
+        "type": "MATERIAL"
+      },
+      {
+        "id": "30094",
+        "count": 1,
+        "type": "MATERIAL"
+      },
+      {
+        "id": "30104",
+        "count": 1,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "13": {
+    "itemId": "30125",
+    "count": 1,
+    "goldCost": 400,
+    "costs": [
+      {
+        "id": "30064",
+        "count": 1,
+        "type": "MATERIAL"
+      },
+      {
+        "id": "30074",
+        "count": 2,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "14": {
+    "itemId": "30115",
+    "count": 1,
+    "goldCost": 400,
+    "costs": [
+      {
+        "id": "30014",
+        "count": 1,
+        "type": "MATERIAL"
+      },
+      {
+        "id": "30044",
+        "count": 1,
+        "type": "MATERIAL"
+      },
+      {
+        "id": "30054",
+        "count": 1,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "15": {
+    "itemId": "30104",
+    "count": 1,
+    "goldCost": 300,
+    "costs": [
+      {
+        "id": "30103",
+        "count": 1,
+        "type": "MATERIAL"
+      },
+      {
+        "id": "30013",
+        "count": 2,
+        "type": "MATERIAL"
+      },
+      {
+        "id": "30053",
+        "count": 1,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "16": {
+    "itemId": "30094",
+    "count": 1,
+    "goldCost": 300,
+    "costs": [
+      {
+        "id": "30093",
+        "count": 1,
+        "type": "MATERIAL"
+      },
+      {
+        "id": "30043",
+        "count": 1,
+        "type": "MATERIAL"
+      },
+      {
+        "id": "30063",
+        "count": 1,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "17": {
+    "itemId": "30084",
+    "count": 1,
+    "goldCost": 300,
+    "costs": [
+      {
+        "id": "30083",
+        "count": 2,
+        "type": "MATERIAL"
+      },
+      {
+        "id": "30033",
+        "count": 1,
+        "type": "MATERIAL"
+      },
+      {
+        "id": "30073",
+        "count": 1,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "18": {
+    "itemId": "30074",
+    "count": 1,
+    "goldCost": 300,
+    "costs": [
+      {
+        "id": "30073",
+        "count": 1,
+        "type": "MATERIAL"
+      },
+      {
+        "id": "30023",
+        "count": 1,
+        "type": "MATERIAL"
+      },
+      {
+        "id": "30103",
+        "count": 1,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "19": {
+    "itemId": "30062",
+    "count": 1,
+    "goldCost": 100,
+    "costs": [
+      {
+        "id": "30061",
+        "count": 3,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "20": {
+    "itemId": "30063",
+    "count": 1,
+    "goldCost": 200,
+    "costs": [
+      {
+        "id": "30062",
+        "count": 4,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "21": {
+    "itemId": "30064",
+    "count": 1,
+    "goldCost": 300,
+    "costs": [
+      {
+        "id": "30063",
+        "count": 1,
+        "type": "MATERIAL"
+      },
+      {
+        "id": "30013",
+        "count": 2,
+        "type": "MATERIAL"
+      },
+      {
+        "id": "30093",
+        "count": 1,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "22": {
+    "itemId": "30052",
+    "count": 1,
+    "goldCost": 100,
+    "costs": [
+      {
+        "id": "30051",
+        "count": 3,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "23": {
+    "itemId": "30053",
+    "count": 1,
+    "goldCost": 200,
+    "costs": [
+      {
+        "id": "30052",
+        "count": 4,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "24": {
+    "itemId": "30054",
+    "count": 1,
+    "goldCost": 300,
+    "costs": [
+      {
+        "id": "30053",
+        "count": 2,
+        "type": "MATERIAL"
+      },
+      {
+        "id": "30023",
+        "count": 1,
+        "type": "MATERIAL"
+      },
+      {
+        "id": "30083",
+        "count": 1,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "25": {
+    "itemId": "30042",
+    "count": 1,
+    "goldCost": 100,
+    "costs": [
+      {
+        "id": "30041",
+        "count": 3,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "26": {
+    "itemId": "30043",
+    "count": 1,
+    "goldCost": 200,
+    "costs": [
+      {
+        "id": "30042",
+        "count": 4,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "27": {
+    "itemId": "30044",
+    "count": 1,
+    "goldCost": 300,
+    "costs": [
+      {
+        "id": "30043",
+        "count": 2,
+        "type": "MATERIAL"
+      },
+      {
+        "id": "30063",
+        "count": 1,
+        "type": "MATERIAL"
+      },
+      {
+        "id": "30033",
+        "count": 1,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "28": {
+    "itemId": "30032",
+    "count": 1,
+    "goldCost": 100,
+    "costs": [
+      {
+        "id": "30031",
+        "count": 3,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "29": {
+    "itemId": "30033",
+    "count": 1,
+    "goldCost": 200,
+    "costs": [
+      {
+        "id": "30032",
+        "count": 4,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "30": {
+    "itemId": "30034",
+    "count": 1,
+    "goldCost": 300,
+    "costs": [
+      {
+        "id": "30033",
+        "count": 2,
+        "type": "MATERIAL"
+      },
+      {
+        "id": "30053",
+        "count": 1,
+        "type": "MATERIAL"
+      },
+      {
+        "id": "30073",
+        "count": 1,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "31": {
+    "itemId": "30022",
+    "count": 1,
+    "goldCost": 100,
+    "costs": [
+      {
+        "id": "30021",
+        "count": 3,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "32": {
+    "itemId": "30023",
+    "count": 1,
+    "goldCost": 200,
+    "costs": [
+      {
+        "id": "30022",
+        "count": 4,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "33": {
+    "itemId": "30024",
+    "count": 1,
+    "goldCost": 300,
+    "costs": [
+      {
+        "id": "30023",
+        "count": 2,
+        "type": "MATERIAL"
+      },
+      {
+        "id": "30043",
+        "count": 1,
+        "type": "MATERIAL"
+      },
+      {
+        "id": "30083",
+        "count": 1,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "34": {
+    "itemId": "30012",
+    "count": 1,
+    "goldCost": 100,
+    "costs": [
+      {
+        "id": "30011",
+        "count": 3,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "35": {
+    "itemId": "30013",
+    "count": 1,
+    "goldCost": 200,
+    "costs": [
+      {
+        "id": "30012",
+        "count": 5,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "36": {
+    "itemId": "30014",
+    "count": 1,
+    "goldCost": 300,
+    "costs": [
+      {
+        "id": "30013",
+        "count": 4,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "37": {
+    "itemId": "3302",
+    "count": 1,
+    "goldCost": 0,
+    "costs": [
+      {
+        "id": "3301",
+        "count": 3,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "38": {
+    "itemId": "3303",
+    "count": 1,
+    "goldCost": 0,
+    "costs": [
+      {
+        "id": "3302",
+        "count": 3,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "39": {
+    "itemId": "3231",
+    "count": 2,
+    "goldCost": 0,
+    "costs": [
+      {
+        "id": "3261",
+        "count": 3,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "40": {
+    "itemId": "3261",
+    "count": 2,
+    "goldCost": 0,
+    "costs": [
+      {
+        "id": "3231",
+        "count": 3,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "41": {
+    "itemId": "3241",
+    "count": 2,
+    "goldCost": 0,
+    "costs": [
+      {
+        "id": "3251",
+        "count": 3,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "42": {
+    "itemId": "3251",
+    "count": 2,
+    "goldCost": 0,
+    "costs": [
+      {
+        "id": "3241",
+        "count": 3,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "43": {
+    "itemId": "3211",
+    "count": 2,
+    "goldCost": 0,
+    "costs": [
+      {
+        "id": "3271",
+        "count": 3,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "44": {
+    "itemId": "3271",
+    "count": 2,
+    "goldCost": 0,
+    "costs": [
+      {
+        "id": "3211",
+        "count": 3,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "45": {
+    "itemId": "3221",
+    "count": 2,
+    "goldCost": 0,
+    "costs": [
+      {
+        "id": "3281",
+        "count": 3,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "46": {
+    "itemId": "3281",
+    "count": 2,
+    "goldCost": 0,
+    "costs": [
+      {
+        "id": "3221",
+        "count": 3,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "47": {
+    "itemId": "3232",
+    "count": 2,
+    "goldCost": 0,
+    "costs": [
+      {
+        "id": "3262",
+        "count": 3,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "48": {
+    "itemId": "3262",
+    "count": 2,
+    "goldCost": 0,
+    "costs": [
+      {
+        "id": "3232",
+        "count": 3,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "49": {
+    "itemId": "3242",
+    "count": 2,
+    "goldCost": 0,
+    "costs": [
+      {
+        "id": "3252",
+        "count": 3,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "50": {
+    "itemId": "3252",
+    "count": 2,
+    "goldCost": 0,
+    "costs": [
+      {
+        "id": "3242",
+        "count": 3,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "51": {
+    "itemId": "3212",
+    "count": 2,
+    "goldCost": 0,
+    "costs": [
+      {
+        "id": "3272",
+        "count": 3,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "52": {
+    "itemId": "3272",
+    "count": 2,
+    "goldCost": 0,
+    "costs": [
+      {
+        "id": "3212",
+        "count": 3,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "53": {
+    "itemId": "3222",
+    "count": 2,
+    "goldCost": 0,
+    "costs": [
+      {
+        "id": "3282",
+        "count": 3,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "54": {
+    "itemId": "3282",
+    "count": 2,
+    "goldCost": 0,
+    "costs": [
+      {
+        "id": "3222",
+        "count": 3,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "55": {
+    "itemId": "31024",
+    "count": 1,
+    "goldCost": 300,
+    "costs": [
+      {
+        "id": "30063",
+        "count": 1,
+        "type": "MATERIAL"
+      },
+      {
+        "id": "30093",
+        "count": 1,
+        "type": "MATERIAL"
+      },
+      {
+        "id": "31023",
+        "count": 1,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "56": {
+    "itemId": "31014",
+    "count": 1,
+    "goldCost": 300,
+    "costs": [
+      {
+        "id": "30043",
+        "count": 1,
+        "type": "MATERIAL"
+      },
+      {
+        "id": "31013",
+        "count": 1,
+        "type": "MATERIAL"
+      },
+      {
+        "id": "31023",
+        "count": 1,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "57": {
+    "itemId": "30145",
+    "count": 1,
+    "goldCost": 400,
+    "costs": [
+      {
+        "id": "31034",
+        "count": 1,
+        "type": "MATERIAL"
+      },
+      {
+        "id": "31014",
+        "count": 2,
+        "type": "MATERIAL"
+      },
+      {
+        "id": "31024",
+        "count": 1,
+        "type": "MATERIAL"
+      }
+    ]
+  },
+  "58": {
+    "itemId": "31034",
+    "count": 1,
+    "goldCost": 300,
+    "costs": [
+      {
+        "id": "31033",
+        "count": 2,
+        "type": "MATERIAL"
+      },
+      {
+        "id": "31013",
+        "count": 1,
+        "type": "MATERIAL"
+      },
+      {
+        "id": "31023",
+        "count": 1,
+        "type": "MATERIAL"
+      }
+    ]
+  }
+}

@@ -1,0 +1,424 @@
+{
+  "2001": {
+    "name": "基础作战记录",
+    "icon": "sprite_exp_card_t1",
+    "rarity": 1
+  },
+  "2002": {
+    "name": "初级作战记录",
+    "icon": "sprite_exp_card_t2",
+    "rarity": 2
+  },
+  "2003": {
+    "name": "中级作战记录",
+    "icon": "sprite_exp_card_t3",
+    "rarity": 3
+  },
+  "2004": {
+    "name": "高级作战记录",
+    "icon": "sprite_exp_card_t4",
+    "rarity": 4
+  },
+  "3211": {
+    "name": "先锋芯片",
+    "icon": "MTL_ASC_PIO1",
+    "rarity": 2,
+    "formula": "43"
+  },
+  "3212": {
+    "name": "先锋芯片组",
+    "icon": "MTL_ASC_PIO2",
+    "rarity": 3,
+    "formula": "51"
+  },
+  "3213": {
+    "name": "先锋双芯片",
+    "icon": "MTL_ASC_PIO3",
+    "rarity": 4
+  },
+  "3221": {
+    "name": "近卫芯片",
+    "icon": "MTL_ASC_GRD1",
+    "rarity": 2,
+    "formula": "45"
+  },
+  "3222": {
+    "name": "近卫芯片组",
+    "icon": "MTL_ASC_GRD2",
+    "rarity": 3,
+    "formula": "53"
+  },
+  "3223": {
+    "name": "近卫双芯片",
+    "icon": "MTL_ASC_GRD3",
+    "rarity": 4
+  },
+  "3231": {
+    "name": "重装芯片",
+    "icon": "MTL_ASC_TNK1",
+    "rarity": 2,
+    "formula": "39"
+  },
+  "3232": {
+    "name": "重装芯片组",
+    "icon": "MTL_ASC_TNK2",
+    "rarity": 3,
+    "formula": "47"
+  },
+  "3233": {
+    "name": "重装双芯片",
+    "icon": "MTL_ASC_TNK3",
+    "rarity": 4
+  },
+  "3241": {
+    "name": "狙击芯片",
+    "icon": "MTL_ASC_SNP1",
+    "rarity": 2,
+    "formula": "41"
+  },
+  "3242": {
+    "name": "狙击芯片组",
+    "icon": "MTL_ASC_SNP2",
+    "rarity": 3,
+    "formula": "49"
+  },
+  "3243": {
+    "name": "狙击双芯片",
+    "icon": "MTL_ASC_SNP3",
+    "rarity": 4
+  },
+  "3251": {
+    "name": "术师芯片",
+    "icon": "MTL_ASC_CST1",
+    "rarity": 2,
+    "formula": "42"
+  },
+  "3252": {
+    "name": "术师芯片组",
+    "icon": "MTL_ASC_CST2",
+    "rarity": 3,
+    "formula": "50"
+  },
+  "3253": {
+    "name": "术师双芯片",
+    "icon": "MTL_ASC_CST3",
+    "rarity": 4
+  },
+  "3261": {
+    "name": "医疗芯片",
+    "icon": "MTL_ASC_MED1",
+    "rarity": 2,
+    "formula": "40"
+  },
+  "3262": {
+    "name": "医疗芯片组",
+    "icon": "MTL_ASC_MED2",
+    "rarity": 3,
+    "formula": "48"
+  },
+  "3263": {
+    "name": "医疗双芯片",
+    "icon": "MTL_ASC_MED3",
+    "rarity": 4
+  },
+  "3271": {
+    "name": "辅助芯片",
+    "icon": "MTL_ASC_SUP1",
+    "rarity": 2,
+    "formula": "44"
+  },
+  "3272": {
+    "name": "辅助芯片组",
+    "icon": "MTL_ASC_SUP2",
+    "rarity": 3,
+    "formula": "52"
+  },
+  "3273": {
+    "name": "辅助双芯片",
+    "icon": "MTL_ASC_SUP3",
+    "rarity": 4
+  },
+  "3281": {
+    "name": "特种芯片",
+    "icon": "MTL_ASC_SPC1",
+    "rarity": 2,
+    "formula": "46"
+  },
+  "3282": {
+    "name": "特种芯片组",
+    "icon": "MTL_ASC_SPC2",
+    "rarity": 3,
+    "formula": "54"
+  },
+  "3283": {
+    "name": "特种双芯片",
+    "icon": "MTL_ASC_SPC3",
+    "rarity": 4
+  },
+  "3301": {
+    "name": "技巧概要·卷1",
+    "icon": "MTL_SKILL1",
+    "rarity": 1
+  },
+  "3302": {
+    "name": "技巧概要·卷2",
+    "icon": "MTL_SKILL2",
+    "rarity": 2,
+    "formula": "37"
+  },
+  "3303": {
+    "name": "技巧概要·卷3",
+    "icon": "MTL_SKILL3",
+    "rarity": 3,
+    "formula": "38"
+  },
+  "4001": {
+    "name": "龙门币",
+    "icon": "GOLD",
+    "rarity": 3
+  },
+  "30011": {
+    "name": "源岩",
+    "icon": "MTL_SL_G1",
+    "rarity": 0
+  },
+  "30012": {
+    "name": "固源岩",
+    "icon": "MTL_SL_G2",
+    "rarity": 1,
+    "formula": "34"
+  },
+  "30013": {
+    "name": "固源岩组",
+    "icon": "MTL_SL_G3",
+    "rarity": 2,
+    "formula": "35"
+  },
+  "30014": {
+    "name": "提纯源岩",
+    "icon": "MTL_SL_G4",
+    "rarity": 3,
+    "formula": "36"
+  },
+  "30021": {
+    "name": "代糖",
+    "icon": "MTL_SL_STRG1",
+    "rarity": 0
+  },
+  "30022": {
+    "name": "糖",
+    "icon": "MTL_SL_STRG2",
+    "rarity": 1,
+    "formula": "31"
+  },
+  "30023": {
+    "name": "糖组",
+    "icon": "MTL_SL_STRG3",
+    "rarity": 2,
+    "formula": "32"
+  },
+  "30024": {
+    "name": "糖聚块",
+    "icon": "MTL_SL_STRG4",
+    "rarity": 3,
+    "formula": "33"
+  },
+  "30031": {
+    "name": "酯原料",
+    "icon": "MTL_SL_RUSH1",
+    "rarity": 0
+  },
+  "30032": {
+    "name": "聚酸酯",
+    "icon": "MTL_SL_RUSH2",
+    "rarity": 1,
+    "formula": "28"
+  },
+  "30033": {
+    "name": "聚酸酯组",
+    "icon": "MTL_SL_RUSH3",
+    "rarity": 2,
+    "formula": "29"
+  },
+  "30034": {
+    "name": "聚酸酯块",
+    "icon": "MTL_SL_RUSH4",
+    "rarity": 3,
+    "formula": "30"
+  },
+  "30041": {
+    "name": "异铁碎片",
+    "icon": "MTL_SL_IRON1",
+    "rarity": 0
+  },
+  "30042": {
+    "name": "异铁",
+    "icon": "MTL_SL_IRON2",
+    "rarity": 1,
+    "formula": "25"
+  },
+  "30043": {
+    "name": "异铁组",
+    "icon": "MTL_SL_IRON3",
+    "rarity": 2,
+    "formula": "26"
+  },
+  "30044": {
+    "name": "异铁块",
+    "icon": "MTL_SL_IRON4",
+    "rarity": 3,
+    "formula": "27"
+  },
+  "30051": {
+    "name": "双酮",
+    "icon": "MTL_SL_KETONE1",
+    "rarity": 0
+  },
+  "30052": {
+    "name": "酮凝集",
+    "icon": "MTL_SL_KETONE2",
+    "rarity": 1,
+    "formula": "22"
+  },
+  "30053": {
+    "name": "酮凝集组",
+    "icon": "MTL_SL_KETONE3",
+    "rarity": 2,
+    "formula": "23"
+  },
+  "30054": {
+    "name": "酮阵列",
+    "icon": "MTL_SL_KETONE4",
+    "rarity": 3,
+    "formula": "24"
+  },
+  "30061": {
+    "name": "破损装置",
+    "icon": "MTL_SL_BOSS1",
+    "rarity": 0
+  },
+  "30062": {
+    "name": "装置",
+    "icon": "MTL_SL_BOSS2",
+    "rarity": 1,
+    "formula": "19"
+  },
+  "30063": {
+    "name": "全新装置",
+    "icon": "MTL_SL_BOSS3",
+    "rarity": 2,
+    "formula": "20"
+  },
+  "30064": {
+    "name": "改量装置",
+    "icon": "MTL_SL_BOSS4",
+    "rarity": 3,
+    "formula": "21"
+  },
+  "30073": {
+    "name": "扭转醇",
+    "icon": "MTL_SL_ALCOHOL1",
+    "rarity": 2
+  },
+  "30074": {
+    "name": "白马醇",
+    "icon": "MTL_SL_ALCOHOL2",
+    "rarity": 3,
+    "formula": "18"
+  },
+  "30083": {
+    "name": "轻锰矿",
+    "icon": "MTL_SL_MANGANESE1",
+    "rarity": 2
+  },
+  "30084": {
+    "name": "三水锰矿",
+    "icon": "MTL_SL_MANGANESE2",
+    "rarity": 3,
+    "formula": "17"
+  },
+  "30093": {
+    "name": "研磨石",
+    "icon": "MTL_SL_PG1",
+    "rarity": 2
+  },
+  "30094": {
+    "name": "五水研磨石",
+    "icon": "MTL_SL_PG2",
+    "rarity": 3,
+    "formula": "16"
+  },
+  "30103": {
+    "name": "RMA70-12",
+    "icon": "MTL_SL_RMA7012",
+    "rarity": 2
+  },
+  "30104": {
+    "name": "RMA70-24",
+    "icon": "MTL_SL_RMA7024",
+    "rarity": 3,
+    "formula": "15"
+  },
+  "30115": {
+    "name": "聚合剂",
+    "icon": "MTL_SL_PP",
+    "rarity": 4,
+    "formula": "14"
+  },
+  "30125": {
+    "name": "双极纳米片",
+    "icon": "MTL_SL_BN",
+    "rarity": 4,
+    "formula": "13"
+  },
+  "30135": {
+    "name": "D32钢",
+    "icon": "MTL_SL_DS",
+    "rarity": 4,
+    "formula": "12"
+  },
+  "30145": {
+    "name": "晶体电子单元",
+    "icon": "MTL_SL_OEU",
+    "rarity": 4,
+    "formula": "57"
+  },
+  "31013": {
+    "name": "凝胶",
+    "icon": "MTL_SL_PGEL3",
+    "rarity": 2
+  },
+  "31014": {
+    "name": "聚合凝胶",
+    "icon": "MTL_SL_PGEL4",
+    "rarity": 3,
+    "formula": "56"
+  },
+  "31023": {
+    "name": "炽合金",
+    "icon": "MTL_SL_IAM3",
+    "rarity": 2
+  },
+  "31024": {
+    "name": "炽合金块",
+    "icon": "MTL_SL_IAM4",
+    "rarity": 3,
+    "formula": "55"
+  },
+  "31033": {
+    "name": "晶体元件",
+    "icon": "MTL_SL_OC3",
+    "rarity": 2
+  },
+  "31034": {
+    "name": "晶体电路",
+    "icon": "MTL_SL_OC4",
+    "rarity": 3,
+    "formula": "58"
+  },
+  "32001": {
+    "name": "芯片助剂",
+    "icon": "MTL_ASC_DI",
+    "rarity": 3
+  }
+}
