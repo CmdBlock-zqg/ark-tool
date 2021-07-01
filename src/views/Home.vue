@@ -135,12 +135,12 @@
         for (let j of Object.keys(costs)) {
           if (j === '0' || j === '4001') continue
           if (this.itemList[j]) this.itemList[j].count += costs[j]
-          else this.itemList[j] = {
+          else this.$set(this.itemList, j, {
             name: this.data_items[j].name,
             icon: this.data_items[j].icon,
             rarity: this.data_items[j].rarity,
             count: costs[j]
-          }
+          })
         }
       }
     }
