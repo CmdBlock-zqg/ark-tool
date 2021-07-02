@@ -221,13 +221,6 @@
       }
     ]
   },
-  "char_504_rguard": {
-    "name": "预备干员-近战",
-    "rarity": 3,
-    "evolveCost": [],
-    "allSkillLvlup": [],
-    "skills": []
-  },
   "char_192_falco": {
     "name": "翎羽",
     "rarity": 3,
@@ -892,13 +885,6 @@
       }
     ]
   },
-  "char_507_rsnipe": {
-    "name": "预备干员-狙击",
-    "rarity": 3,
-    "evolveCost": [],
-    "allSkillLvlup": [],
-    "skills": []
-  },
   "char_121_lava": {
     "name": "炎熔",
     "rarity": 3,
@@ -1148,13 +1134,6 @@
       }
     ]
   },
-  "char_506_rmedic": {
-    "name": "预备干员-后勤",
-    "rarity": 3,
-    "evolveCost": [],
-    "allSkillLvlup": [],
-    "skills": []
-  },
   "char_210_stward": {
     "name": "史都华德",
     "rarity": 3,
@@ -1237,13 +1216,6 @@
         "levelUpCost": []
       }
     ]
-  },
-  "char_505_rcast": {
-    "name": "预备干员-术师",
-    "rarity": 3,
-    "evolveCost": [],
-    "allSkillLvlup": [],
-    "skills": []
   },
   "char_278_orchid": {
     "name": "梓兰",
@@ -13983,30 +13955,6 @@
       }
     ]
   },
-  "char_508_aguard": {
-    "name": "Sharp",
-    "rarity": 5,
-    "evolveCost": [],
-    "allSkillLvlup": [
-      null,
-      null,
-      null,
-      null,
-      null,
-      null
-    ],
-    "skills": [
-      {
-        "skillId": "skchr_aguard_1",
-        "skillName": "亮剑",
-        "levelUpCost": [
-          null,
-          null,
-          null
-        ]
-      }
-    ]
-  },
   "char_155_tiger": {
     "name": "因陀罗",
     "rarity": 5,
@@ -17227,30 +17175,6 @@
       }
     ]
   },
-  "char_511_asnipe": {
-    "name": "Stormeye",
-    "rarity": 5,
-    "evolveCost": [],
-    "allSkillLvlup": [
-      null,
-      null,
-      null,
-      null,
-      null,
-      null
-    ],
-    "skills": [
-      {
-        "skillId": "skchr_asnipe_1",
-        "skillName": "旋臂",
-        "levelUpCost": [
-          null,
-          null,
-          null
-        ]
-      }
-    ]
-  },
   "char_365_aprl": {
     "name": "四月",
     "rarity": 5,
@@ -19374,30 +19298,6 @@
               "type": "MATERIAL"
             }
           ]
-        ]
-      }
-    ]
-  },
-  "char_509_acast": {
-    "name": "Pith",
-    "rarity": 5,
-    "evolveCost": [],
-    "allSkillLvlup": [
-      null,
-      null,
-      null,
-      null,
-      null,
-      null
-    ],
-    "skills": [
-      {
-        "skillId": "skchr_acast_1",
-        "skillName": "“为我所为”",
-        "levelUpCost": [
-          null,
-          null,
-          null
         ]
       }
     ]
@@ -21928,30 +21828,6 @@
               "type": "MATERIAL"
             }
           ]
-        ]
-      }
-    ]
-  },
-  "char_510_amedic": {
-    "name": "Touch",
-    "rarity": 5,
-    "evolveCost": [],
-    "allSkillLvlup": [
-      null,
-      null,
-      null,
-      null,
-      null,
-      null
-    ],
-    "skills": [
-      {
-        "skillId": "skchr_amedic_1",
-        "skillName": "宛如天启",
-        "levelUpCost": [
-          null,
-          null,
-          null
         ]
       }
     ]
@@ -41946,6 +41822,303 @@
             {
               "id": "30094",
               "count": 5,
+              "type": "MATERIAL"
+            }
+          ]
+        ]
+      }
+    ]
+  },
+  "char_485_pallas": {
+    "name": "帕拉斯",
+    "rarity": 6,
+    "evolveCost": [
+      [
+        {
+          "id": "3221",
+          "count": 5,
+          "type": "MATERIAL"
+        },
+        {
+          "id": "30012",
+          "count": 12,
+          "type": "MATERIAL"
+        },
+        {
+          "id": "30062",
+          "count": 3,
+          "type": "MATERIAL"
+        }
+      ],
+      [
+        {
+          "id": "3223",
+          "count": 4,
+          "type": "MATERIAL"
+        },
+        {
+          "id": "30145",
+          "count": 4,
+          "type": "MATERIAL"
+        },
+        {
+          "id": "30074",
+          "count": 6,
+          "type": "MATERIAL"
+        }
+      ]
+    ],
+    "allSkillLvlup": [
+      [
+        {
+          "id": "3301",
+          "count": 5,
+          "type": "MATERIAL"
+        }
+      ],
+      [
+        {
+          "id": "3301",
+          "count": 5,
+          "type": "MATERIAL"
+        },
+        {
+          "id": "30021",
+          "count": 5,
+          "type": "MATERIAL"
+        },
+        {
+          "id": "30051",
+          "count": 4,
+          "type": "MATERIAL"
+        }
+      ],
+      [
+        {
+          "id": "3302",
+          "count": 8,
+          "type": "MATERIAL"
+        },
+        {
+          "id": "30032",
+          "count": 5,
+          "type": "MATERIAL"
+        }
+      ],
+      [
+        {
+          "id": "3302",
+          "count": 8,
+          "type": "MATERIAL"
+        },
+        {
+          "id": "30042",
+          "count": 4,
+          "type": "MATERIAL"
+        },
+        {
+          "id": "30022",
+          "count": 3,
+          "type": "MATERIAL"
+        }
+      ],
+      [
+        {
+          "id": "3302",
+          "count": 8,
+          "type": "MATERIAL"
+        },
+        {
+          "id": "30063",
+          "count": 4,
+          "type": "MATERIAL"
+        }
+      ],
+      [
+        {
+          "id": "3303",
+          "count": 8,
+          "type": "MATERIAL"
+        },
+        {
+          "id": "30073",
+          "count": 5,
+          "type": "MATERIAL"
+        },
+        {
+          "id": "30053",
+          "count": 4,
+          "type": "MATERIAL"
+        }
+      ]
+    ],
+    "skills": [
+      {
+        "skillId": "skchr_pallas_1",
+        "skillName": "胜利的连击",
+        "levelUpCost": [
+          [
+            {
+              "id": "3303",
+              "count": 8,
+              "type": "MATERIAL"
+            },
+            {
+              "id": "30094",
+              "count": 4,
+              "type": "MATERIAL"
+            },
+            {
+              "id": "30073",
+              "count": 7,
+              "type": "MATERIAL"
+            }
+          ],
+          [
+            {
+              "id": "3303",
+              "count": 12,
+              "type": "MATERIAL"
+            },
+            {
+              "id": "31024",
+              "count": 4,
+              "type": "MATERIAL"
+            },
+            {
+              "id": "30104",
+              "count": 8,
+              "type": "MATERIAL"
+            }
+          ],
+          [
+            {
+              "id": "3303",
+              "count": 15,
+              "type": "MATERIAL"
+            },
+            {
+              "id": "30145",
+              "count": 6,
+              "type": "MATERIAL"
+            },
+            {
+              "id": "30044",
+              "count": 4,
+              "type": "MATERIAL"
+            }
+          ]
+        ]
+      },
+      {
+        "skillId": "skchr_pallas_2",
+        "skillName": "信念的长鞭",
+        "levelUpCost": [
+          [
+            {
+              "id": "3303",
+              "count": 8,
+              "type": "MATERIAL"
+            },
+            {
+              "id": "30014",
+              "count": 4,
+              "type": "MATERIAL"
+            },
+            {
+              "id": "30093",
+              "count": 7,
+              "type": "MATERIAL"
+            }
+          ],
+          [
+            {
+              "id": "3303",
+              "count": 12,
+              "type": "MATERIAL"
+            },
+            {
+              "id": "30054",
+              "count": 4,
+              "type": "MATERIAL"
+            },
+            {
+              "id": "31014",
+              "count": 9,
+              "type": "MATERIAL"
+            }
+          ],
+          [
+            {
+              "id": "3303",
+              "count": 15,
+              "type": "MATERIAL"
+            },
+            {
+              "id": "30125",
+              "count": 6,
+              "type": "MATERIAL"
+            },
+            {
+              "id": "31024",
+              "count": 5,
+              "type": "MATERIAL"
+            }
+          ]
+        ]
+      },
+      {
+        "skillId": "skchr_pallas_3",
+        "skillName": "英勇的祝福",
+        "levelUpCost": [
+          [
+            {
+              "id": "3303",
+              "count": 8,
+              "type": "MATERIAL"
+            },
+            {
+              "id": "31014",
+              "count": 4,
+              "type": "MATERIAL"
+            },
+            {
+              "id": "30013",
+              "count": 11,
+              "type": "MATERIAL"
+            }
+          ],
+          [
+            {
+              "id": "3303",
+              "count": 12,
+              "type": "MATERIAL"
+            },
+            {
+              "id": "30064",
+              "count": 3,
+              "type": "MATERIAL"
+            },
+            {
+              "id": "30044",
+              "count": 6,
+              "type": "MATERIAL"
+            }
+          ],
+          [
+            {
+              "id": "3303",
+              "count": 15,
+              "type": "MATERIAL"
+            },
+            {
+              "id": "30115",
+              "count": 6,
+              "type": "MATERIAL"
+            },
+            {
+              "id": "31014",
+              "count": 7,
               "type": "MATERIAL"
             }
           ]
