@@ -106,18 +106,37 @@
       </v-card>
     </v-dialog>
 
+    <v-snackbar v-model="snackbarShow">
+      游戏新内容已更新 请刷新页面
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="primary"
+          text
+          v-bind="attrs"
+          @click="refresh"
+        >
+          刷新
+        </v-btn>
+      </template>
+    </v-snackbar>
+
   </v-app>
 </template>
 
 <script>
 
+import initReg from './registerServiceWorker'
+
 export default {
   data: () => ({
     drawer: null,
     selectedItem: 0,
-    loadData: true
+    loadData: true,
+
+    snackbarShow: false
   }),
   async mounted() {
+    initReg(this)
     var LS = window.localStorage
     if (LS.init) {
       this.loadData = false
@@ -147,6 +166,12 @@ export default {
     navTo(to) {
       if (this.$route.path === to) return
       this.$router.push(to)
+    },
+    snackbar() {
+      this.snackbarShow = true
+    },
+    refresh() {
+      window.location.reload()
     }
   }
 }

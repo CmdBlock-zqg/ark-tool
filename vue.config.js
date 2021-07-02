@@ -8,6 +8,7 @@ module.exports = {
       skipWaiting: true,
       exclude: [
         'manifest.json',
+        /\.map$/,
         /^assets\/(avatars|skills|items)\//
       ],
       runtimeCaching: [

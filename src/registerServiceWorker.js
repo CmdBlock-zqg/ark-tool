@@ -2,6 +2,8 @@
 
 import { register } from 'register-service-worker'
 
+var that
+
 if (process.env.NODE_ENV === 'production') {
   register(`${process.env.BASE_URL}service-worker.js`, {
     ready () {
@@ -20,6 +22,7 @@ if (process.env.NODE_ENV === 'production') {
       console.log('New content is downloading.')
     },
     updated () {
+      that.snackbar()
       console.log('New content is available; please refresh.')
     },
     offline () {
@@ -29,4 +32,8 @@ if (process.env.NODE_ENV === 'production') {
       console.error('Error during service worker registration:', error)
     }
   })
+}
+
+export default (t) => {
+  that = t
 }
