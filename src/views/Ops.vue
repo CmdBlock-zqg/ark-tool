@@ -102,7 +102,7 @@
       :key="k"
     >
       <div style="height: 80px;">
-        <img style="float: left;" :src="`/assets/avatars/${v.id}.png`" height="80">
+        <img style="float: left;" :src="`/assets/avatars/${v.id}.png`" height="80" width="80">
         <div style="height: 80px; float: left; padding: 16px;">
           <span style="font-size: 20px;">{{ v.name }}</span>
           <br>
@@ -130,7 +130,7 @@
           </div>
         </div>
         <div style="height: 80px; float: left; margin-left: 8px; padding-top: 12px;" v-for="(s, i) in data_characters[k].skills" :key="s.skillId">
-          <img :src="`/assets/skills/skill_icon_${s.skillId}.png`" height="56">
+          <img :src="`/assets/skills/skill_icon_${s.skillId}.png`" height="56" width="56">
           <div class="rank">
             {{ v.cur.allSkills + v.cur.skills[i] }}
           </div>
@@ -146,7 +146,7 @@
           </div>
         </div>
         <div style="height: 80px; float: left; margin-left: 8px; padding-top: 12px;" v-for="(s, i) in data_characters[k].skills" :key="s.skillId">
-          <img :src="`/assets/skills/skill_icon_${s.skillId}.png`" height="56">
+          <img :src="`/assets/skills/skill_icon_${s.skillId}.png`" height="56" width="56">
           <div class="rank">
             {{ v.aim.allSkills + v.aim.skills[i] }}
           </div>

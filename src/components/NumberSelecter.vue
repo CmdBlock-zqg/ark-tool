@@ -74,6 +74,14 @@ export default({
   },
   methods: {
     add(k) {
+      if (this.value === this.min && k < 0) {
+        this.$emit('input', this.max)
+        return
+      }
+      if (this.value === this.max && k > 0) {
+        this.$emit('input', this.min)
+        return
+      }
       let res = this.value + k
       if (res > this.max) this.$emit('input', this.max)
       else if (res < this.min) this.$emit('input', this.min)

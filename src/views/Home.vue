@@ -2,7 +2,7 @@
   <div style="padding: 16px;">
     <div class="card" style="text-align: center;">
       <v-card-text>
-        <v-icon style="font-size: 100px;">mdi-cube</v-icon>
+        <v-icon style="font-size: 100px;">mdi-cube-outline</v-icon>
         <p class="text-h4 text--primary">
           欢迎使用明日方舟养成规划器
         </p>

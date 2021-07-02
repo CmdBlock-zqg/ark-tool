@@ -138,7 +138,7 @@ export default {
       search[characters[i].name] = i
     }
     LS.data_search = JSON.stringify(search)
-    LS.user_ops = JSON.stringify({})
+    if (!LS.user_ops) LS.user_ops = JSON.stringify({})
 
     LS.init = true
     this.loadData = false
