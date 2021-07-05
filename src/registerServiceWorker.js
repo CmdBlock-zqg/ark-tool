@@ -28,6 +28,7 @@ if (process.env.NODE_ENV === 'production') {
     },
     updated () {
       console.log('[ServiceWorker] 新内容下载完成')
+      delete window.localStorage.init
       window.mdui.snackbar({
         message: '新内容已更新完毕，请刷新页面启用',
         buttonText: '刷新',

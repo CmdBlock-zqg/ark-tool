@@ -128,14 +128,23 @@ export default {
   data: () => ({
     drawer: null,
     selectedItem: 0,
-    loadData: true,
+    loadData: false,
   }),
   async mounted() {
     let LS = window.localStorage
-    if (LS.init) {
-      this.loadData = false
-      return
+
+    if (!LS.user_ops) LS.user_ops = JSON.stringify({})
+
+    if (!LS.user_mtls) {
+      let mtls = {}
+      for (let i of Object.keys(items)) {
+        if (items[i].icon.indexOf('MTL_SL') === -1) continue
+        mtls[i] = 0
+      }
+      LS.user_mtls = JSON.stringify(mtls)
     }
+
+    if (LS.init) return
     this.loadData = true
     let { data: characters } = await this.$axios.get('/data/characters.json')
     let { data: common } = await this.$axios.get('/data/common.json')
@@ -152,16 +161,6 @@ export default {
     }
     LS.data_search = JSON.stringify(search)
 
-    if (!LS.user_ops) LS.user_ops = JSON.stringify({})
-
-    if (!LS.user_mtls) {
-      let mtls = {}
-      for (let i of Object.keys(items)) {
-        if (items[i].icon.indexOf('MTL_SL') === -1) continue
-        mtls[i] = 0
-      }
-      LS.user_mtls = JSON.stringify(mtls)
-    }
     LS.init = true
     this.loadData = false
   },
