@@ -14,6 +14,10 @@ const routes = [
     component: () => import('../views/Stat.vue')
   },
   {
+    path: '/ware',
+    component: () => import('../views/Ware.vue')
+  },
+  {
     path: '/ops',
     component: () => import('../views/Ops.vue')
   }
