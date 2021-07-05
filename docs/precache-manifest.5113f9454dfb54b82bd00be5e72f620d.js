@@ -60,16 +60,24 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/icons/512x512.png"
   },
   {
-    "revision": "8a926b74c0ffecca5933",
+    "revision": "cfc80b8662eb5f2dd825",
     "url": "/css/app.2e39bb3d.css"
   },
   {
-    "revision": "c9d6c5d25dbb5ccb70c8",
-    "url": "/css/chunk-5dbf5a57.4c9f503b.css"
+    "revision": "26d2bf8dc6be6b2fb955",
+    "url": "/css/chunk-0e535310.3512edea.css"
   },
   {
-    "revision": "d62b81d14042bc88b32d",
-    "url": "/css/chunk-vendors.7582c851.css"
+    "revision": "bf018010565b88970dcc",
+    "url": "/css/chunk-41bfa317.34c1770c.css"
+  },
+  {
+    "revision": "e3ff5398a162c7db586f",
+    "url": "/css/chunk-972bafe8.432b5a7a.css"
+  },
+  {
+    "revision": "20b0e5df47cd86a06fc0",
+    "url": "/css/chunk-vendors.d80e7096.css"
   },
   {
     "revision": "45854f2944f050c8a150d1fe4108090b",
@@ -88,24 +96,40 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/data/items.json"
   },
   {
-    "revision": "e4fc80ed2080dbd1cc843eee0db718d0",
+    "revision": "3d9e81d5fd6045dfcd54025fc68ee2ac",
     "url": "/index.html"
   },
   {
-    "revision": "8a926b74c0ffecca5933",
-    "url": "/js/app.57512a9c.js"
+    "revision": "cfc80b8662eb5f2dd825",
+    "url": "/js/app.43f42686.js"
+  },
+  {
+    "revision": "26d2bf8dc6be6b2fb955",
+    "url": "/js/chunk-0e535310.f9d61b83.js"
   },
   {
     "revision": "61595a085fb0f8ebbc54",
     "url": "/js/chunk-2d0e1991.5886f298.js"
   },
   {
-    "revision": "c9d6c5d25dbb5ccb70c8",
-    "url": "/js/chunk-5dbf5a57.11bf860f.js"
+    "revision": "bf018010565b88970dcc",
+    "url": "/js/chunk-41bfa317.9ad804a1.js"
   },
   {
-    "revision": "d62b81d14042bc88b32d",
-    "url": "/js/chunk-vendors.2ce21a79.js"
+    "revision": "e3ff5398a162c7db586f",
+    "url": "/js/chunk-972bafe8.7beb2e62.js"
+  },
+  {
+    "revision": "20b0e5df47cd86a06fc0",
+    "url": "/js/chunk-vendors.c72ffef1.js"
+  },
+  {
+    "revision": "af6d5b0f9db60d6ac1ffa4560583c5fe",
+    "url": "/mdui/mdui.min.css"
+  },
+  {
+    "revision": "46af9e1aecfa414dc468ba46886017c2",
+    "url": "/mdui/mdui.min.js"
   },
   {
     "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",
