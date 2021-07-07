@@ -107,6 +107,8 @@
 </template>
 
 <script>
+import data from './data.js'
+
 export default {
   data: () => ({
     drawer: null,
@@ -115,7 +117,14 @@ export default {
   async mounted() {
     let LS = window.localStorage
     if (!LS.user_ops) LS.user_ops = '{}'
-    if (!LS.user_mtls) LS.user_mtls = '{"4001": 0}'
+    if (!LS.user_mtls) {
+      let user_mtls = {}
+      for (let i of Object.keys(data.item)) {
+        if (data.item[i].icon.indexOf('MTL_SL') === -1) continue
+        user_mtls[i] = 0
+      }
+      LS.user_mtls = JSON.stringify(user_mtls)
+    }
   },
   methods: {
     navTo(to) {
