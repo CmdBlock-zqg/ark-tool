@@ -17,24 +17,6 @@
                 v-on="on"
               ><v-icon>mdi-plus</v-icon>添加</v-btn>
 
-              <v-snackbar
-                v-model="addDialog.snackbar.show"
-                :timeout="2000"
-              >
-                {{ addDialog.snackbar.text }}
-
-                <template v-slot:action="{ attrs }">
-                  <v-btn
-                    color="blue"
-                    text
-                    v-bind="attrs"
-                    @click="addDialog.snackbar.show = false"
-                  >
-                    OK
-                  </v-btn>
-                </template>
-              </v-snackbar>
-
             </template>
             <v-card>
               <v-card-title>
@@ -129,7 +111,7 @@
             {{ v.cur.level }}
           </div>
         </div>
-        <div style="height: 80px; float: left; margin-left: 8px; padding-top: 12px;" v-for="(s, i) in data_characters[k].skills" :key="s.skillId">
+        <div style="height: 80px; float: left; margin-left: 8px; padding-top: 12px;" v-for="(s, i) in data.character[k].skills" :key="s.skillId">
           <img :src="`/assets/skills/skill_icon_${s.skillId}.png`" height="56" width="56">
           <div class="rank">
             {{ v.cur.allSkills + v.cur.skills[i] }}
@@ -145,7 +127,7 @@
             {{ v.aim.level }}
           </div>
         </div>
-        <div style="height: 80px; float: left; margin-left: 8px; padding-top: 12px;" v-for="(s, i) in data_characters[k].skills" :key="s.skillId">
+        <div style="height: 80px; float: left; margin-left: 8px; padding-top: 12px;" v-for="(s, i) in data.character[k].skills" :key="s.skillId">
           <img :src="`/assets/skills/skill_icon_${s.skillId}.png`" height="56" width="56">
           <div class="rank">
             {{ v.aim.allSkills + v.aim.skills[i] }}
@@ -164,7 +146,7 @@
         </v-card-title>
         <v-card-text>
           <number-selecter v-model="edit.evolve" title="精英化等级" :min="0" :max="edit.rarity > 3 ? 2 : (edit.rarity > 2 ? 1 : 0)"></number-selecter>
-          <number-selecter plus v-model="edit.level" title="等级" :min="1" :max="data_common.maxLevel[edit.rarity][edit.evolve]"></number-selecter>
+          <number-selecter plus v-model="edit.level" title="等级" :min="1" :max="data.common.maxLevel[edit.rarity][edit.evolve]"></number-selecter>
           <number-selecter v-show="edit.rarity > 2" v-model="edit.allSkills" title="通用技能等级" :min="1" :max="edit.evolve > 0 ? 7 : 4"></number-selecter>
           <number-selecter v-show="edit.rarity > 3 && edit.allSkills === 7 && edit.evolve === 2" v-model="edit.skills[0]" title="一技能专精等级" :min="0" :max="edit.allSkills === 7 && edit.evolve === 2 ? 3 : 0"></number-selecter>
           <number-selecter v-show="edit.rarity > 3 && edit.allSkills === 7 && edit.evolve === 2" v-model="edit.skills[1]" title="二技能专精等级" :min="0" :max="edit.allSkills === 7 && edit.evolve === 2 ? 3 : 0"></number-selecter>
@@ -211,9 +193,9 @@
 <script>
 
 var LS = window.localStorage
-const data_search = JSON.parse(LS.data_search)
 
 import NumberSelecter from '../components/NumberSelecter.vue'
+import data from '../data.js'
 
 export default({
   components: {
@@ -222,16 +204,11 @@ export default({
   data() {
     return {
       user_ops: JSON.parse(LS.user_ops),
-      data_characters: JSON.parse(LS.data_characters),
-      data_common: JSON.parse(LS.data_common),
+      data: data,
       addDialog: {
         show: false,
         input: '',
-        opList: Object.keys(data_search),
-        snackbar: {
-          show: false,
-          text: ''
-        }
+        opList: Object.keys(data.search),
       },
       delDialog: {
         id: '',
@@ -256,13 +233,12 @@ export default({
     addOp() {
       this.addDialog.show = false
       if (!this.addDialog.input) return
-      let opid = data_search[this.addDialog.input]
+      let opid = data.search[this.addDialog.input]
       if (this.user_ops[opid]) {
-        this.addDialog.snackbar.text = '干员已存在'
-        this.addDialog.snackbar.show = true
+        window.mdui.snackbar({ message: '干员已存在' })
         return
       }
-      let character = this.data_characters[opid]
+      let character = this.data.character[opid]
       this.user_ops[opid] = {
         id: opid,
         name: character.name,
@@ -289,7 +265,7 @@ export default({
       LS.user_ops = JSON.stringify(this.user_ops)
     },
     editOp(id, type) {
-      let char = this.data_characters[id]
+      let char = this.data.character[id]
       let op = this.user_ops[id]
       this.edit.id = id
       this.edit.name = char.name
@@ -318,34 +294,34 @@ export default({
       this.edit.show = false
     },
     updateCost(op) {
-      const char = this.data_characters[op.id]
+      const char = data.character[op.id]
       let res = {}
       // 升级&精英化 龙门币4001
       for (let i = op.cur.evolve; i < op.aim.evolve; i++) {
         // 升满级
-        if (res[4001]) res[4001] += this.data_common.upgradeCost[i][this.data_common.maxLevel[op.rarity][i]] - this.data_common.upgradeCost[i][op.cur.level]
-        else res[4001] = this.data_common.upgradeCost[i][this.data_common.maxLevel[op.rarity][i]] - this.data_common.upgradeCost[i][op.cur.level]
+        if (res[4001]) res[4001] += data.common.upgradeCost[i][data.common.maxLevel[op.rarity][i]] - data.common.upgradeCost[i][op.cur.level]
+        else res[4001] = data.common.upgradeCost[i][data.common.maxLevel[op.rarity][i]] - data.common.upgradeCost[i][op.cur.level]
 
-        if (res[0]) res[0] += this.data_common.characterExp[i][this.data_common.maxLevel[op.rarity][i]] - this.data_common.characterExp[i][op.cur.level]
-        else res[0] = this.data_common.characterExp[i][this.data_common.maxLevel[op.rarity][i]] - this.data_common.characterExp[i][op.cur.level]
+        if (res[0]) res[0] += data.common.characterExp[i][data.common.maxLevel[op.rarity][i]] - data.common.characterExp[i][op.cur.level]
+        else res[0] = data.common.characterExp[i][data.common.maxLevel[op.rarity][i]] - data.common.characterExp[i][op.cur.level]
 
         // 精英化
         for (let j of char.evolveCost[i]) {
           if (res[j.id]) res[j.id] += j.count
           else res[j.id] = j.count
         }
-        if (res[4001]) res[4001] += this.data_common.evolveCost[op.rarity][i]
-        else res[4001] = this.data_common.evolveCost[op.rarity][i]
+        if (res[4001]) res[4001] += data.common.evolveCost[op.rarity][i]
+        else res[4001] = data.common.evolveCost[op.rarity][i]
 
         // 改属性
         op.cur.evolve += 1
         op.cur.level = 1
       }
-      if (res[4001]) res[4001] += this.data_common.upgradeCost[op.aim.evolve][op.aim.level] - this.data_common.upgradeCost[op.aim.evolve][op.cur.level]
-      else res[4001] = this.data_common.upgradeCost[op.aim.evolve][op.aim.level] - this.data_common.upgradeCost[op.aim.evolve][op.cur.level]
+      if (res[4001]) res[4001] += data.common.upgradeCost[op.aim.evolve][op.aim.level] - data.common.upgradeCost[op.aim.evolve][op.cur.level]
+      else res[4001] = data.common.upgradeCost[op.aim.evolve][op.aim.level] - data.common.upgradeCost[op.aim.evolve][op.cur.level]
 
-      if (res[0]) res[0] += this.data_common.characterExp[op.aim.evolve][op.aim.level] - this.data_common.characterExp[op.aim.evolve][op.cur.level]
-      else res[0] = this.data_common.characterExp[op.aim.evolve][op.aim.level] - this.data_common.characterExp[op.aim.evolve][op.cur.level]
+      if (res[0]) res[0] += data.common.characterExp[op.aim.evolve][op.aim.level] - data.common.characterExp[op.aim.evolve][op.cur.level]
+      else res[0] = data.common.characterExp[op.aim.evolve][op.aim.level] - data.common.characterExp[op.aim.evolve][op.cur.level]
 
       // 通用技能升级
       for (let i = op.cur.allSkills - 1; i < op.aim.allSkills - 1; i++) {

@@ -32,6 +32,7 @@ if (process.env.NODE_ENV === 'production') {
       window.mdui.snackbar({
         message: '新内容已更新完毕，请刷新页面启用',
         buttonText: '刷新',
+        timeout: 0,
         onButtonClick: function(){
           window.location.reload()
         },

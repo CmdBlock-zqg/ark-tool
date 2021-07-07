@@ -103,23 +103,6 @@
     <v-main>
       <router-view/>
     </v-main>
-
-    <v-dialog
-      v-model="loadData"
-      persistent
-      width="400"
-    >
-      <v-card style="text-align: center; padding: 24px;">
-        <v-progress-circular
-          :size="50"
-          color="primary"
-          indeterminate
-        ></v-progress-circular>
-        <div style="margin-top: 16px;">
-          首次打开 正在下载数据
-        </div>
-      </v-card>
-    </v-dialog>
   </v-app>
 </template>
 
@@ -128,34 +111,11 @@ export default {
   data: () => ({
     drawer: null,
     selectedItem: 0,
-    loadData: false,
   }),
   async mounted() {
     let LS = window.localStorage
-
-    if (!LS.user_ops) LS.user_ops = JSON.stringify({})
-
-    if (!LS.user_mtls) LS.user_mtls = '{"30011":0,"30012":0,"30013":0,"30014":0,"30021":0,"30022":0,"30023":0,"30024":0,"30031":0,"30032":0,"30033":0,"30034":0,"30041":0,"30042":0,"30043":0,"30044":0,"30051":0,"30052":0,"30053":0,"30054":0,"30061":0,"30062":0,"30063":0,"30064":0,"30073":0,"30074":0,"30083":0,"30084":0,"30093":0,"30094":0,"30103":0,"30104":0,"30115":0,"30125":0,"30135":0,"30145":0,"31013":0,"31014":0,"31023":0,"31024":0,"31033":0,"31034":0}'
-
-    if (LS.init) return
-    this.loadData = true
-    let { data: characters } = await this.$axios.get('/data/characters.json')
-    let { data: common } = await this.$axios.get('/data/common.json')
-    let { data: formulas } = await this.$axios.get('/data/formulas.json')
-    let { data: items } = await this.$axios.get('/data/items.json')
-    LS.data_characters = JSON.stringify(characters)
-    LS.data_common = JSON.stringify(common)
-    LS.data_formulas = JSON.stringify(formulas)
-    LS.data_items = JSON.stringify(items)
-
-    let search = {}
-    for (let i of Object.keys(characters)) {
-      search[characters[i].name] = i
-    }
-    LS.data_search = JSON.stringify(search)
-
-    LS.init = true
-    this.loadData = false
+    if (!LS.user_ops) LS.user_ops = '{}'
+    if (!LS.user_mtls) LS.user_mtls = '{"4001": 0}'
   },
   methods: {
     navTo(to) {

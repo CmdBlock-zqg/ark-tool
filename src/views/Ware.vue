@@ -16,9 +16,9 @@
     </div>
 
     <div class="d-flex justify-space-around flex-wrap">
-      <v-card class="item" :class="[`t${data_items[k].rarity}`, `order-${4 - data_items[k].rarity}`]" elevation="3" v-for="(v, k) in user_mtls" :key="k">
-        <img :src="`/assets/items/${data_items[k].icon}.png`" height="80" width="80" @click="open(k)">
-        <div class="text-center">{{ data_items[k].name }}</div>
+      <v-card class="item" :class="[`t${data.item[k].rarity}`, `order-${4 - data.item[k].rarity}`]" elevation="3" v-for="(v, k) in user_mtls" :key="k">
+        <img :src="`/assets/items/${data.item[k].icon}.png`" height="80" width="80" @click="open(k)">
+        <div class="text-center">{{ data.item[k].name }}</div>
         <div class="d-flex justify-space-between">
           <v-btn
             elevation="2"
@@ -37,10 +37,10 @@
       </v-card>
     </div>
 
-    <v-dialog v-model="edit.show">
+    <v-dialog v-model="edit.show" width="400">
       <v-card>
         <v-card-title class="text-h6 lighten-2">
-          {{ data_items[edit.id].name }}
+          {{ data.item[edit.id].name }}
         </v-card-title>
 
         <v-card-text>
@@ -105,11 +105,12 @@
 <script>
 
 var LS = window.localStorage
+import data from '../data.js'
 
 export default ({
   data() {
     return {
-      data_items: JSON.parse(LS.data_items),
+      data: data,
       user_mtls: JSON.parse(LS.user_mtls),
 
       edit: {
@@ -118,6 +119,13 @@ export default ({
         num: 0
       }
     }
+  },
+  mounted() {
+    for (let i of Object.keys(data.item)) {
+      if (data.item[i].icon.indexOf('MTL_SL') === -1 || this.user_mtls[i]) continue
+      this.user_mtls[i] = 0
+    }
+    LS.user_mtls = JSON.stringify(this.user_mtls)
   },
   methods: {
     add(k, t) {

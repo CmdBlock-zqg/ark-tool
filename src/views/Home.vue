@@ -114,35 +114,35 @@
 </style>
 
 <script>
+const LS = window.localStorage
+import data from '../data.js'
 
-  const LS = window.localStorage
-
-  export default {
-    data() {
-      return {
-        user_ops: JSON.parse(LS.user_ops),
-        data_items: JSON.parse(LS.data_items),
-        itemList: {},
-        lmb: 0,
-        exp: 0
-      }
-    },
-    mounted() {
-      for (let i of Object.keys(this.user_ops)) {
-        let costs = this.user_ops[i].costs
-        if (costs[4001]) this.lmb += costs[4001]
-        if (costs[0]) this.exp += costs[0]
-        for (let j of Object.keys(costs)) {
-          if (j === '0' || j === '4001') continue
-          if (this.itemList[j]) this.itemList[j].count += costs[j]
-          else this.$set(this.itemList, j, {
-            name: this.data_items[j].name,
-            icon: this.data_items[j].icon,
-            rarity: this.data_items[j].rarity,
-            count: costs[j]
-          })
-        }
+export default {
+  data() {
+    return {
+      user_ops: JSON.parse(LS.user_ops),
+      data: data,
+      itemList: {},
+      lmb: 0,
+      exp: 0
+    }
+  },
+  mounted() {
+    for (let i of Object.keys(this.user_ops)) {
+      let costs = this.user_ops[i].costs
+      if (costs[4001]) this.lmb += costs[4001]
+      if (costs[0]) this.exp += costs[0]
+      for (let j of Object.keys(costs)) {
+        if (j === '0' || j === '4001') continue
+        if (this.itemList[j]) this.itemList[j].count += costs[j]
+        else this.$set(this.itemList, j, {
+          name: data.item[j].name,
+          icon: data.item[j].icon,
+          rarity: data.item[j].rarity,
+          count: costs[j]
+        })
       }
     }
   }
+}
 </script>
