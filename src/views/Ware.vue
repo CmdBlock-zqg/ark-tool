@@ -11,7 +11,7 @@
             @click="save"
           ><v-icon>mdi-content-save-outline</v-icon>保存</v-btn>
         </div>
-        <div style="margin-top: 8px;">点击材料图标可输入数量和查看更多选项</div>
+        <div style="margin-top: 8px;">点击材料图标可查看更多选项</div>
       </v-card-text>
     </div>
 
@@ -27,11 +27,11 @@
             >
           </template>
           <v-list dense>
-            <v-list-item link>
-              <v-list-item-title @click="openEdit(k)">输入数量</v-list-item-title>
+            <v-list-item link @click="openEdit(k)">
+              <v-list-item-title>输入数量</v-list-item-title>
             </v-list-item>
-            <v-list-item link>
-              <v-list-item-title @click="openForm(k)">合成</v-list-item-title>
+            <v-list-item link @click="openForm(k)">
+              <v-list-item-title>合成</v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
@@ -120,11 +120,6 @@
               </v-row>
             </v-container>
           </v-toolbar>
-          <div>此处“最多”不考虑下位材料合成，与游戏中相同</div>
-          <v-switch
-            v-model="form.sub"
-            label="下位材料不足时自动合成"
-          ></v-switch>
         </v-card-text>
 
         <v-divider></v-divider>
@@ -203,8 +198,7 @@ export default ({
         show: false,
         formula: {},
         id: 30011,
-        num: 0,
-        sub: false
+        num: 0
       }
     }
   },
@@ -235,19 +229,35 @@ export default ({
       this.form.id = k
       this.form.formula = data.formula[data.item[k].formula]
       this.form.num = 0
-      this.form.sub = false
       this.form.show = true
     },
     applyForm() {
       this.form.show = false
+      let res = Infinity
+      for (let i of this.form.formula.costs) {
+        res = Math.min(res, Math.floor(this.user_mtls[i.id] / i.count))
+      }
+      if (this.form.num > res) {
+        window.mdui.snackbar({ message: '材料不足' })
+        return
+      }
+      for (let i of this.form.formula.costs) {
+        this.user_mtls[i.id] -= i.count * res
+      }
+      this.user_mtls[this.form.id] += this.form.formula.count * res
     },
     formAdd(k) {// -1, 1, -2, 2
       if (k === -2) { // 最少
         this.form.num = 0
-      } else if (k === -1) {
-        if (this.form.num > 0) this.form.num--
-      } else if (k === 1) {
-        this.form.num++
+      } else if (k === -1) { // 减一
+        if (this.form.num > 0) this.form.num --
+      } else if (k === 1) { // 加一
+        let res = Infinity
+        for (let i of this.form.formula.costs) {
+          res = Math.min(res, Math.floor(this.user_mtls[i.id] / i.count))
+        }
+        if (this.form.num + 1 > res) return
+        this.form.num ++
       } else if (k === 2) { // 最多
         let res = Infinity
         for (let i of this.form.formula.costs) {

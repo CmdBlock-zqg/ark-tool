@@ -1,9 +1,5 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "bfb750ea749747151d67cbfee8100398",
-    "url": "/CNAME"
-  },
-  {
     "revision": "760fb84b7e6459fe00d666c1ea4a2188",
     "url": "/assets/common/elite_0.png"
   },
@@ -64,63 +60,51 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/assets/icons/512x512.png"
   },
   {
-    "revision": "ad1951d58e0e50cbf8db",
+    "revision": "ec4e25445c579fdd1f6d",
     "url": "/css/app.1f274b40.css"
   },
   {
-    "revision": "8705c8c93db6fe69697d",
-    "url": "/css/chunk-704304e2.11fa6b84.css"
+    "revision": "12129b2b416e1a0d1aeb",
+    "url": "/css/chunk-2f8b652c.8af09a85.css"
   },
   {
-    "revision": "eb12a33b0182939f8e92",
+    "revision": "cb7ea975dc37bab74f82",
+    "url": "/css/chunk-68aeac70.7dc12048.css"
+  },
+  {
+    "revision": "1f7aea4cc06a5411e78e",
     "url": "/css/chunk-94318618.47bae696.css"
   },
   {
-    "revision": "4b6f3947454705887763",
-    "url": "/css/chunk-da618dfa.c96a7cb6.css"
+    "revision": "f34cdc26c892b0f81a33",
+    "url": "/css/chunk-vendors.7e652d04.css"
   },
   {
-    "revision": "8edf86abf4a91566df1a",
-    "url": "/css/chunk-vendors.2e98a910.css"
-  },
-  {
-    "revision": "fc1fcd500519b4df9b7cb91d3a018cc6",
+    "revision": "bbc00746c5477285e347ebe7f966d287",
     "url": "/index.html"
   },
   {
-    "revision": "ad1951d58e0e50cbf8db",
-    "url": "/js/app.9cb9a338.js"
+    "revision": "ec4e25445c579fdd1f6d",
+    "url": "/js/app.f558e2d0.js"
   },
   {
     "revision": "61595a085fb0f8ebbc54",
     "url": "/js/chunk-2d0e1991.5886f298.js"
   },
   {
-    "revision": "8705c8c93db6fe69697d",
-    "url": "/js/chunk-704304e2.bff08297.js"
+    "revision": "12129b2b416e1a0d1aeb",
+    "url": "/js/chunk-2f8b652c.c9a768f6.js"
   },
   {
-    "revision": "eb12a33b0182939f8e92",
-    "url": "/js/chunk-94318618.89408325.js"
+    "revision": "cb7ea975dc37bab74f82",
+    "url": "/js/chunk-68aeac70.11b1a387.js"
   },
   {
-    "revision": "4b6f3947454705887763",
-    "url": "/js/chunk-da618dfa.9ffef3bf.js"
+    "revision": "1f7aea4cc06a5411e78e",
+    "url": "/js/chunk-94318618.ef8ff0b1.js"
   },
   {
-    "revision": "8edf86abf4a91566df1a",
-    "url": "/js/chunk-vendors.35909937.js"
-  },
-  {
-    "revision": "af6d5b0f9db60d6ac1ffa4560583c5fe",
-    "url": "/mdui/mdui.min.css"
-  },
-  {
-    "revision": "46af9e1aecfa414dc468ba46886017c2",
-    "url": "/mdui/mdui.min.js"
-  },
-  {
-    "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",
-    "url": "/robots.txt"
+    "revision": "f34cdc26c892b0f81a33",
+    "url": "/js/chunk-vendors.3e1218ca.js"
   }
 ]);

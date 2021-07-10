@@ -9,6 +9,8 @@ module.exports = {
       skipWaiting: true,
       exclude: [
         'manifest.json',
+        'CNAME',
+        'robots.txt',
         /\.map$/,
         /^assets\/(avatars|skills|items)\//
       ],
