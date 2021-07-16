@@ -295,7 +295,7 @@ export default({
     },
     updateCost(op) {
       const char = data.character[op.id]
-      let res = {}
+      let res = { 4001: 0, 0: 0 }
       // 升级&精英化 龙门币4001
       for (let i = op.cur.evolve; i < op.aim.evolve; i++) {
         // 升满级

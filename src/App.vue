@@ -19,65 +19,70 @@
         dense
         nav
       >
-        <v-list-item
-          link
-          :key="0"
-          @click="navTo('/')"
+        <v-list-item-group
+          :value="$route.meta.key"
+          color="primary"
         >
-          <v-list-item-icon>
-            <v-icon>mdi-home</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>
-              主页
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+          <v-list-item
+            link
+            key="home"
+            @click="navTo('/')"
+          >
+            <v-list-item-icon>
+              <v-icon>mdi-home</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>
+                主页
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
 
-        <v-list-item
-          link
-          :key="1"
-          @click="navTo('/stat')"
-        >
-          <v-list-item-icon>
-            <v-icon>mdi-poll-box</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>
-              统计
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+          <v-list-item
+            link
+            key="stat"
+            @click="navTo('/stat')"
+          >
+            <v-list-item-icon>
+              <v-icon>mdi-poll-box</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>
+                统计
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
 
-        <v-list-item
-          link
-          :key="2"
-          @click="navTo('/ops')"
-        >
-          <v-list-item-icon>
-            <v-icon>mdi-chess-rook</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>
-              干员
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+          <v-list-item
+            link
+            key="ops"
+            @click="navTo('/ops')"
+          >
+            <v-list-item-icon>
+              <v-icon>mdi-chess-rook</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>
+                干员
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
 
-        <v-list-item
-          link
-          :key="3"
-          @click="navTo('/ware')"
-        >
-          <v-list-item-icon>
-            <v-icon>mdi-layers-triple-outline</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>
-              仓库
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+          <v-list-item
+            link
+            key="ware"
+            @click="navTo('/ware')"
+          >
+            <v-list-item-icon>
+              <v-icon>mdi-layers-triple-outline</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>
+                仓库
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
 
@@ -87,7 +92,7 @@
       dark
     >
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>主页</v-toolbar-title>
+      <v-toolbar-title>{{ $route.meta.title }}</v-toolbar-title>
     </v-app-bar>
 
     <v-main>
@@ -100,9 +105,11 @@
 import data from './data.js'
 
 export default {
-  data: () => ({
-    drawer: null
-  }),
+  data() {
+    return {
+      drawer: null,
+    }
+  },
   async mounted() {
     let LS = window.localStorage
     if (!LS.user_ops) LS.user_ops = '{}'

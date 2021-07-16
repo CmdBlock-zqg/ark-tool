@@ -7,19 +7,35 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    component: Home
+    component: Home,
+    meta: {
+      key: 0,
+      title: '主页'
+    }
   },
   {
     path: '/stat',
-    component: () => import('../views/Stat.vue')
+    component: () => import('../views/Stat.vue'),
+    meta: {
+      key: 1,
+      title: '统计'
+    }
   },
   {
     path: '/ware',
-    component: () => import('../views/Ware.vue')
+    component: () => import('../views/Ware.vue'),
+    meta: {
+      key: 2,
+      title: '仓库'
+    }
   },
   {
     path: '/ops',
-    component: () => import('../views/Ops.vue')
+    component: () => import('../views/Ops.vue'),
+    meta: {
+      key: 3,
+      title: '干员'
+    }
   }
 ]
 
