@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.521084735dcf4fbad17abe649f4828ac.js"
+  "/precache-manifest.a12edfe09944f261bef18d31d94c840d.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "ark-tool"});

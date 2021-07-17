@@ -10,7 +10,7 @@
             明日方舟养成规划
           </v-list-item-title>
           <v-list-item-subtitle>
-            By CmdBlock
+            1.0 alpha By CmdBlock
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>

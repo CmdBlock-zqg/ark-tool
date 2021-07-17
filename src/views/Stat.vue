@@ -8,28 +8,34 @@
       v-model="selectedOps"
     ></v-combobox>
 
-    <v-card class="display">
-      <div class="text-h5">
-        共需龙门币：{{ totalGold }}
-      </div>
-      <div class="d-flex" style="height: 36px; line-height: 36px;">
-        相当于LS-5刷{{ Math.ceil(totalGold / 7500) }}次
-      </div>
-      <div class="text-h5">
-        共需经验：{{ totalExp }}
-      </div>
-      <div class="d-flex" style="height: 36px; line-height: 36px;">
-        相当于：
-        <img style="margin-right: 8px;" src="/assets/items/sprite_exp_card_t4.png" height="36">
-        {{ Math.ceil(totalExp / 2000) }}
-        <img style="margin-right: 8px;" src="/assets/items/sprite_exp_card_t3.png" height="36">
-        {{ Math.ceil(totalExp / 1000) }}
-        <img style="margin-right: 8px;" src="/assets/items/sprite_exp_card_t2.png" height="36">
-        {{ Math.ceil(totalExp / 400) }}
-        <img style="margin-right: 8px;" src="/assets/items/sprite_exp_card_t1.png" height="36">
-        {{ Math.ceil(totalExp / 200) }}
-      </div>
-    </v-card>
+    <div class="d-flex justify-space-around flex-wrap">
+      <v-card class="display">
+        <div class="text-h5">
+          共需龙门币：{{ totalGold }}
+        </div>
+        <div class="d-flex" style="height: 36px; line-height: 36px;">
+          相当于CE-5刷{{ Math.ceil(totalGold / 7500) }}次
+        </div>
+        <div class="text-h5">
+          共需经验：{{ totalExp }}
+        </div>
+        <div>相当于：</div>
+        <div class="d-flex" style="height: 36px; line-height: 36px;">
+          <img style="margin-right: 8px;" src="/assets/items/sprite_exp_card_t4.png" height="36">
+          {{ Math.ceil(totalExp / 2000) }}
+          <img style="margin-right: 8px;" src="/assets/items/sprite_exp_card_t3.png" height="36">
+          {{ Math.ceil(totalExp / 1000) }}
+        </div>
+        <div class="d-flex" style="height: 36px; line-height: 36px;">
+          <img style="margin-right: 8px;" src="/assets/items/sprite_exp_card_t2.png" height="36">
+          {{ Math.ceil(totalExp / 400) }}
+          <img style="margin-right: 8px;" src="/assets/items/sprite_exp_card_t1.png" height="36">
+          {{ Math.ceil(totalExp / 200) }}
+        </div>
+      </v-card>
+    </div>
+
+    
 
     
 
@@ -53,7 +59,7 @@
   }
   .display {
     padding: 16px;
-    margin: 0 16px 16px 16px;
+    margin: 16px 0;
   }
   .card {
     margin: 8px;

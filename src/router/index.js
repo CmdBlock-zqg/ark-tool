@@ -22,19 +22,19 @@ const routes = [
     }
   },
   {
-    path: '/ware',
-    component: () => import('../views/Ware.vue'),
-    meta: {
-      key: 2,
-      title: '仓库'
-    }
-  },
-  {
     path: '/ops',
     component: () => import('../views/Ops.vue'),
     meta: {
-      key: 3,
+      key: 2,
       title: '干员'
+    }
+  },
+  {
+    path: '/ware',
+    component: () => import('../views/Ware.vue'),
+    meta: {
+      key: 3,
+      title: '仓库'
     }
   }
 ]
