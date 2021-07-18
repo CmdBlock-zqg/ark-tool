@@ -15,7 +15,7 @@
       </v-card-text>
     </div>
 
-    <div class="d-flex justify-space-around flex-wrap">
+    <div class="d-flex justify-start flex-wrap">
       <v-card class="item" :class="[`t${data.item[k].rarity}`, `order-${4 - data.item[k].rarity}`]" elevation="3" v-for="(v, k) in user_mtls" :key="k">
         <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">

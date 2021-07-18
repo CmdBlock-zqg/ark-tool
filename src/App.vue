@@ -113,6 +113,10 @@ export default {
   async mounted() {
     let LS = window.localStorage
     if (!LS.user_ops) LS.user_ops = '{}'
+    if (!LS.plan) LS.plan = JSON.stringify([{
+      name: '当前练度',
+      op: {}
+    }])
     if (!LS.user_mtls) {
       let user_mtls = {}
       for (let i of Object.keys(data.item)) {

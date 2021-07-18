@@ -30,6 +30,14 @@ const routes = [
     }
   },
   {
+    path: '/plan',
+    component: () => import('../views/Plan.vue'),
+    meta: {
+      key: 4,
+      title: '养成规划'
+    }
+  },
+  {
     path: '/ware',
     component: () => import('../views/Ware.vue'),
     meta: {

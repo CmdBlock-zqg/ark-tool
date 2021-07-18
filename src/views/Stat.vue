@@ -34,12 +34,7 @@
         </div>
       </v-card>
     </div>
-
-    
-
-    
-
-    <div class="d-flex justify-space-around flex-wrap">
+    <div class="d-flex justify-start flex-wrap">
       <v-card class="item" :class="[`t${data.item[k].rarity}`, `order-${4 - data.item[k].rarity}`]" elevation="3" v-for="(v, k) in totalMtls" :key="k">
         <img
           :src="`/assets/items/${data.item[k].icon}.png`"

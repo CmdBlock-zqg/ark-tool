@@ -38,7 +38,7 @@ let getCost = (op) => {
   // 专精
   for (let s = 0; s < 3; s++) {
     for (let i = 0; i < op.skill[s]; i++) {
-      for (let j of char.skill[s].levelUpCost[i]) {
+      for (let j of char.skills[s].levelUpCost[i]) {
         res[j.id] = res[j.id] ? res[j.id] + j.count : j.count
       }
     }
