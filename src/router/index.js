@@ -18,31 +18,23 @@ const routes = [
     component: () => import('../views/Stat.vue'),
     meta: {
       key: 1,
-      title: '统计'
-    }
-  },
-  {
-    path: '/ops',
-    component: () => import('../views/Ops.vue'),
-    meta: {
-      key: 2,
-      title: '干员'
+      title: '材料统计'
     }
   },
   {
     path: '/plan',
     component: () => import('../views/Plan.vue'),
     meta: {
-      key: 4,
+      key: 2,
       title: '养成规划'
     }
   },
   {
-    path: '/ware',
-    component: () => import('../views/Ware.vue'),
+    path: '/item',
+    component: () => import('../views/Item.vue'),
     meta: {
       key: 3,
-      title: '仓库'
+      title: '材料仓库'
     }
   }
 ]

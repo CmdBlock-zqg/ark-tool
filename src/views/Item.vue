@@ -1,58 +1,65 @@
 <template>
   <div style="padding: 16px;">
     <div class="card">
-      <v-card-text>
-        <div class="text-h5 text--primary">
-          材料仓库
-          <v-btn
-            color="primary"
-            elevation="2"
-            style="float: right;"
-            @click="save"
-          ><v-icon>mdi-content-save-outline</v-icon>保存</v-btn>
-        </div>
-        <div style="margin-top: 8px;">点击材料图标可查看更多选项</div>
-      </v-card-text>
+      <div class="text-h5 text--primary">
+        材料仓库
+      </div>
+      <div style="margin-top: 8px;">
+        即已有材料<br>
+        点击材料图标可设置数量和合成
+      </div>
     </div>
 
-    <div class="d-flex justify-start flex-wrap">
-      <v-card class="item" :class="[`t${data.item[k].rarity}`, `order-${4 - data.item[k].rarity}`]" elevation="3" v-for="(v, k) in user_mtls" :key="k">
-        <v-menu offset-y>
-          <template v-slot:activator="{ on, attrs }">
-            <img
-              :src="`/assets/items/${data.item[k].icon}.png`"
-              height="80" width="80"
-              v-bind="attrs"
-              v-on="on"
-            >
-          </template>
-          <v-list dense>
-            <v-list-item link @click="openEdit(k)">
-              <v-list-item-title>输入数量</v-list-item-title>
-            </v-list-item>
-            <v-list-item link @click="openForm(k)">
-              <v-list-item-title>合成</v-list-item-title>
-            </v-list-item>
-          </v-list>
-        </v-menu>
-        <div class="text-center">{{ data.item[k].name }}</div>
-        <div class="d-flex justify-space-between">
-          <v-btn
-            elevation="2"
-            icon
-            small
-            @click="add(k, -1)"
-          ><v-icon>mdi-minus</v-icon></v-btn>
-          <span style="line-height: 24px;">{{ v }}</span>
-          <v-btn
-            elevation="2"
-            icon
-            small
-            @click="add(k, 1)"
-          ><v-icon>mdi-plus</v-icon></v-btn>
-        </div>
-      </v-card>
-    </div>
+    <v-expansion-panels>
+      <v-expansion-panel
+        v-for="t in panelList"
+        :key="t.type"
+      >
+        <v-expansion-panel-header>
+          {{ t.title }}
+        </v-expansion-panel-header>
+        <v-expansion-panel-content>
+          <div class="d-flex justify-start flex-wrap">
+            <v-card class="item" :class="[`t${data.item[k].rarity}`, `order-${4 - data.item[k].rarity}`]" elevation="3" v-for="(v, k) in mtl[t.type]" :key="k">
+              <v-menu offset-y>
+                <template v-slot:activator="{ on, attrs }">
+                  <img
+                    :src="`/assets/items/${data.item[k].icon}.png`"
+                    height="80" width="80"
+                    v-bind="attrs"
+                    v-on="on"
+                  >
+                </template>
+                <v-list dense>
+                  <v-list-item link @click="openEdit(t.type, k)">
+                    <v-list-item-title>输入数量</v-list-item-title>
+                  </v-list-item>
+                  <v-list-item link @click="openForm(t.type, k)">
+                    <v-list-item-title>合成</v-list-item-title>
+                  </v-list-item>
+                </v-list>
+              </v-menu>
+              <div class="text-center">{{ data.item[k].name }}</div>
+              <div class="d-flex justify-space-between">
+                <v-btn
+                  elevation="2"
+                  icon
+                  small
+                  @click="add(t.type, k, -1)"
+                ><v-icon>mdi-minus</v-icon></v-btn>
+                <span style="line-height: 24px;">{{ v }}</span>
+                <v-btn
+                  elevation="2"
+                  icon
+                  small
+                  @click="add(t.type, k, 1)"
+                ><v-icon>mdi-plus</v-icon></v-btn>
+              </div>
+            </v-card>
+          </div>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+    </v-expansion-panels>
 
     <v-dialog v-model="edit.show" width="400">
       <v-card>
@@ -99,7 +106,6 @@
         <v-card-text>
           <div style="margin-bottom: 16px;">
             <span>合成{{ data.item[form.id].name }} x {{ form.formula.count }}需要：</span><br>
-            <span>龙门币 x {{ form.formula.goldCost }}</span><br>
             <template v-for="(v, k) in form.formula.costs">
               <span :key="k">{{ data.item[v.id].name }} x {{ v.count }}</span>
               <br :key="k + 'br'">
@@ -145,6 +151,12 @@
   </div>
 </template>
 
+<style>
+.v-expansion-panel-content__wrap {
+    padding: 0 4px 16px !important;
+  }
+</style>
+
 <style scoped>
   .card {
     margin: 8px;
@@ -178,73 +190,76 @@
 </style>
 
 <script>
-
-var LS = window.localStorage
+const LS = window.localStorage
 import data from '../data.js'
 
-export default ({
+export default {
   data() {
     return {
-      data: data,
-      user_mtls: JSON.parse(LS.user_mtls),
+      data,
+      mtl: JSON.parse(LS.mtl),
+
+      panelList: [
+        { type: 'asc', title: '芯片' },
+        { type: 'skill', title: '技巧概要' },
+        { type: 'sl', title: '精英材料' }
+      ],
 
       edit: {
         show: false,
-        id: 30011,
+        type: 'asc',
+        id: '32001',
         num: 0
       },
 
       form: {
         show: false,
+        type: 'asc',
         formula: {},
-        id: 30011,
+        id: '32001',
         num: 0
       }
     }
   },
   methods: {
-    add(k, t) {
-      if (this.user_mtls[k] === 0 && t == -1) return
-      this.user_mtls[k] += t
-    },
     save() {
-      LS.user_mtls = JSON.stringify(this.user_mtls)
-      window.mdui.snackbar({ message: '已保存' })
+      LS.mtl = JSON.stringify(this.mtl)
     },
-    openEdit(k) {
+    add(t, k, d) {
+      if (this.mtl[t][k] === 0 && d == -1) return
+      this.mtl[t][k] += d
+      this.save()
+    },
+    openEdit(t, k) {
       this.edit.id = k
-      this.edit.num = this.user_mtls[k]
+      this.edit.type = t
+      this.edit.num = this.mtl[t][k]
       this.edit.show = true
     },
     applyEdit() {
       let v = this.edit.num
-      if (v >= 0) this.user_mtls[this.edit.id] = Math.floor(v)
+      if (v >= 0) this.mtl[this.edit.type][this.edit.id] = Math.floor(v)
+      this.save()
       this.edit.show = false
     },
-    openForm(k) {
+    openForm(t, k) {
       if (!data.item[k].formula) {
         window.mdui.snackbar({ message: '该材料无法合成' })
         return
       }
       this.form.id = k
+      this.form.type = t
       this.form.formula = data.formula[data.item[k].formula]
       this.form.num = 0
       this.form.show = true
     },
     applyForm() {
       this.form.show = false
-      let res = Infinity
       for (let i of this.form.formula.costs) {
-        res = Math.min(res, Math.floor(this.user_mtls[i.id] / i.count))
+        this.mtl[this.form.type][i.id] -= i.count * this.form.num
       }
-      if (this.form.num > res) {
-        window.mdui.snackbar({ message: '材料不足' })
-        return
-      }
-      for (let i of this.form.formula.costs) {
-        this.user_mtls[i.id] -= i.count * res
-      }
-      this.user_mtls[this.form.id] += this.form.formula.count * res
+      this.mtl[this.form.type][this.form.id] += this.form.formula.count * this.form.num
+      this.save()
     },
     formAdd(k) {// -1, 1, -2, 2
       if (k === -2) { // 最少
@@ -254,18 +269,18 @@ export default ({
       } else if (k === 1) { // 加一
         let res = Infinity
         for (let i of this.form.formula.costs) {
-          res = Math.min(res, Math.floor(this.user_mtls[i.id] / i.count))
+          res = Math.min(res, Math.floor(this.mtl[this.form.type][i.id] / i.count))
         }
         if (this.form.num + 1 > res) return
         this.form.num ++
       } else if (k === 2) { // 最多
         let res = Infinity
         for (let i of this.form.formula.costs) {
-          res = Math.min(res, Math.floor(this.user_mtls[i.id] / i.count))
+          res = Math.min(res, Math.floor(this.mtl[this.form.type][i.id] / i.count))
         }
         this.form.num = res
       }
     }
   }
-})
+}
 </script>

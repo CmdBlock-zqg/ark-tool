@@ -7,7 +7,8 @@
       <div style="margin-top: 8px;">
         节点：按时间/优先级顺序规划的养成目标<br>
         点击节点进入编辑页面，可新建新的节点或修改其备注及干员情况<br>
-        “当前练度”节点不可删除，未在节点声明的干员默认为初始练度
+        “当前练度”节点不可删除，未在节点声明的干员默认为初始练度<br>
+        请务必保证后面节点的练度高于之前
       </div>
     </div>
     <div class="d-flex justify-start flex-wrap">
@@ -257,7 +258,7 @@ export default {
       plan: JSON.parse(LS.plan),
       data,
 
-      show: true,
+      show: false,
       nodeId: 0,
 
       add: {

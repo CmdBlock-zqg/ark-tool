@@ -48,37 +48,37 @@
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title>
-                统计
+                材料统计
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
 
           <v-list-item
             link
-            key="ops"
-            @click="navTo('/ops')"
+            key="plan"
+            @click="navTo('/plan')"
           >
             <v-list-item-icon>
               <v-icon>mdi-chess-rook</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title>
-                干员
+                养成规划
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
 
           <v-list-item
             link
-            key="ware"
-            @click="navTo('/ware')"
+            key="item"
+            @click="navTo('/item')"
           >
             <v-list-item-icon>
               <v-icon>mdi-layers-triple-outline</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title>
-                仓库
+                材料仓库
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -112,18 +112,22 @@ export default {
   },
   async mounted() {
     let LS = window.localStorage
-    if (!LS.user_ops) LS.user_ops = '{}'
     if (!LS.plan) LS.plan = JSON.stringify([{
       name: '当前练度',
       op: {}
     }])
-    if (!LS.user_mtls) {
-      let user_mtls = {}
-      for (let i of Object.keys(data.item)) {
-        if (data.item[i].icon.indexOf('MTL_SL') === -1) continue
-        user_mtls[i] = 0
+    if (!LS.mtl) {
+      let mtl = {
+        sl: {},
+        asc: {},
+        skill: {}
       }
-      LS.user_mtls = JSON.stringify(user_mtls)
+      for (let i of Object.keys(data.item)) {
+        if (data.item[i].icon.indexOf('MTL_SL') === 0) mtl.sl[i] = 0
+        if (data.item[i].icon.indexOf('MTL_ASC') === 0) mtl.asc[i] = 0
+        if (data.item[i].icon.indexOf('MTL_SKILL') === 0) mtl.skill[i] = 0
+      }
+      LS.mtl = JSON.stringify(mtl)
     }
   },
   methods: {
