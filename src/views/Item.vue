@@ -200,8 +200,10 @@ export default {
       mtl: JSON.parse(LS.mtl),
 
       panelList: [
+        { type: 'gold', title: '龙门币' },
         { type: 'asc', title: '芯片' },
         { type: 'skill', title: '技巧概要' },
+        { type: 'exp', title: '作战记录' },
         { type: 'sl', title: '精英材料' }
       ],
 

@@ -47,12 +47,39 @@ let getCost = (op) => {
 }
 
 /*
-计算c1 - c2 请保证c1中元素一定比c2多
+计算c1 - c2
 */
-let getDif = (c1, c2) => {
+let minus = (c1, c2) => {
   let res = {}
   for (let i of Object.keys(c1)) {
-    res[i] = c2[i] ? c1[i] - c2[i] : c1[i]
+    if (c2[i]) {
+      if (c1[i] > c2[i]) res[i] = c1[i] - c2[i]
+    } else {
+      res[i] = c1[i]
+    }
+  }
+  return res
+}
+
+let minusLeft = (c1, c2) => {
+  let res = {}
+  for (let i of Object.keys(c2)) {
+    if (!c1[i]) res[i] = c2[i]
+    if (c2[i] > c1[i]) res[i] = c2[i] - c1[i]
+  }
+  return res
+}
+
+/*
+计算c1 + c2
+*/
+let plus = (c1, c2) => {
+  let res = {}
+  for (let i of Object.keys(c1)) {
+    res[i] = res[i] ? res[i] + c1[i] : c1[i]
+  }
+  for (let i of Object.keys(c2)) {
+    res[i] = res[i] ? res[i] + c2[i] : c2[i]
   }
   return res
 }
@@ -62,6 +89,8 @@ export default {
     getCost
   },
   mtl: {
-    getDif
+    plus,
+    minus,
+    minusLeft
   }
 }

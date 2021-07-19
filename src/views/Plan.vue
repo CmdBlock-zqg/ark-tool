@@ -4,11 +4,19 @@
       <div class="text-h5 text--primary">
         养成规划
       </div>
-      <div style="margin-top: 8px;">
-        节点：按时间/优先级顺序规划的养成目标<br>
-        点击节点进入编辑页面，可新建新的节点或修改其备注及干员情况<br>
-        “当前练度”节点不可删除，未在节点声明的干员默认为初始练度<br>
-        请务必保证后面节点的练度高于之前
+      <div style="margin-top: 8px; height: 100px;">
+        <div style="float: left">
+          节点即养成目标<br>
+          点击节点进入编辑页面，可修改其名称和干员情况<br>
+          “当前练度”节点不可删除，未声明的干员默认为初始练度<br>
+          请务必保证其他节点的练度高于当前练度
+        </div>
+        <v-btn
+          color="primary"
+          elevation="2"
+          style="float: right;"
+          @click="addNode"
+        ><v-icon>mdi-plus</v-icon>添加</v-btn>
       </div>
     </div>
     <div class="d-flex justify-start flex-wrap">
@@ -50,9 +58,6 @@
             <v-list dense>
               <v-list-item link @click="renameNode">
                 <v-list-item-title>重命名节点</v-list-item-title>
-              </v-list-item>
-              <v-list-item link @click="insertNode">
-                <v-list-item-title>在此节点后新建节点</v-list-item-title>
               </v-list-item>
               <v-list-item link @click="deleteNode">
                 <v-list-item-title>删除节点</v-list-item-title>
@@ -178,21 +183,21 @@
           <number-selecter
             v-show="edit.op.rarity > 3 && edit.op.allSkill === 7 && edit.op.phase === 2"
             v-model="edit.op.skill[0]"
-            title="一技能专精等级"
+            :title="`一技能 ${ emptify(data.character[edit.op.id].skills[0]).skillName } 专精等级`"
             :min="0"
             :max="edit.op.allSkill === 7 && edit.op.phase === 2 ? 3 : 0"
           ></number-selecter>
           <number-selecter
             v-show="edit.op.rarity > 3 && edit.op.allSkill === 7 && edit.op.phase === 2"
             v-model="edit.op.skill[1]"
-            title="二技能专精等级"
+            :title="`二技能 ${ emptify(data.character[edit.op.id].skills[1]).skillName } 专精等级`"
             :min="0"
             :max="edit.op.allSkill === 7 && edit.op.phase === 2 ? 3 : 0"
           ></number-selecter>
           <number-selecter
             v-show="edit.op.rarity > 5 && edit.op.allSkill === 7 && edit.op.phase === 2"
             v-model="edit.op.skill[2]"
-            title="三技能专精等级"
+            :title="`三技能 ${ emptify(data.character[edit.op.id].skills[2]).skillName } 专精等级`"
             :min="0"
             :max="edit.op.allSkill === 7 && edit.op.phase === 2 ? 3 : 0"
           ></number-selecter>
@@ -270,7 +275,7 @@ export default {
         show: false,
         id: '',
         op: {
-          id: '',
+          id: 'char_285_medic2',
           name: '',
           rarity: 0,
           level: 0,
@@ -279,7 +284,9 @@ export default {
           skill: [0, 0, 0],
           cost: { 4001: 0, 0: 0 }
         }
-      }
+      },
+
+      emptify: (v) => v ? v : {}
     }
   },
   computed: {
@@ -311,13 +318,13 @@ export default {
         onConfirm
       )
     },
-    insertNode() {
+    addNode() {
       let onConfirm = (v) => {
         if (v === '') {
           window.mdui.alert('请输入新节点名称')
           return
         }
-        this.plan.splice(this.nodeId + 1, 0, { name: v, op: {} })
+        this.plan.splice(this.plan.length, 0, { name: v, op: {} })
         LS.plan = JSON.stringify(this.plan)
         this.show = false
       }
