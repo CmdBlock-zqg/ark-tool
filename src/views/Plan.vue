@@ -6,37 +6,58 @@
       </div>
       <div style="margin-top: 8px; height: 100px;">
         <div style="float: left">
-          节点即养成目标<br>
-          点击节点进入编辑页面，可修改其名称和干员情况<br>
-          “当前练度”节点不可删除，未声明的干员默认为初始练度<br>
-          请务必保证其他节点的练度高于当前练度
+          点击右侧按钮，可添加一个<b>养成目标</b><br>
+          点击卡片编辑，可修改其名称和干员情况<br>
+          “当前练度”为特殊目标不可删除<br>
+          未声明的干员默认为初始练度<br>
+          拖拽可改变顺序
         </div>
         <v-btn
           color="primary"
           elevation="2"
           style="float: right;"
           @click="addNode"
-        ><v-icon>mdi-plus</v-icon>添加</v-btn>
+        ><v-icon>mdi-plus</v-icon>添加目标</v-btn>
       </div>
     </div>
-    <div class="d-flex justify-start flex-wrap">
-      <v-card
-        v-for="(v, k) in plan"
-        :key="k"
-        @click="showNode(k)"
 
-        style="width: 300px; margin: 8px;"
+    <div class="drag">
+       <v-card
+        class="drag-item"
         v-ripple
+        @click="showNode(0)"
       >
-        <v-card-title>{{ v.name }}</v-card-title>
-        <v-card-text>干员数：{{ Object.keys(v.op).length }}</v-card-text>
+        <v-card-title>当前练度</v-card-title>
+        <v-card-text>干员数：{{ Object.keys(plan[0].op).length }}</v-card-text>
       </v-card>
+
+      <draggable
+        v-model="plan"
+        @start="drag.drag = true"
+        @end="drag.drag = false"
+        @update="save"
+        v-bind="drag.options"
+      >
+        <transition-group type="transition" :name="!drag.drag ? 'flip-list' : null">
+          <v-card
+            v-for="(v, i) in plan"
+            :key="i"
+            v-show="i !== 0"
+            class="drag-item"
+            v-ripple
+            @click="showNode(i)"
+          >
+            <v-card-title>{{ v.name }}</v-card-title>
+            <v-card-text>干员数：{{ Object.keys(v.op).length }}</v-card-text>
+          </v-card>
+        </transition-group>
+      </draggable>
     </div>
 
+    <!--节点详情-->
     <v-dialog
       v-model="show"
       fullscreen
-      hide-overlay
       persistent
       no-click-animation
       :retain-focus="false"
@@ -57,10 +78,10 @@
             </template>
             <v-list dense>
               <v-list-item link @click="renameNode">
-                <v-list-item-title>重命名节点</v-list-item-title>
+                <v-list-item-title>重命名</v-list-item-title>
               </v-list-item>
               <v-list-item link @click="deleteNode">
-                <v-list-item-title>删除节点</v-list-item-title>
+                <v-list-item-title>删除</v-list-item-title>
               </v-list-item>
             </v-list>
           </v-menu>
@@ -107,50 +128,71 @@
             </v-card>
           </v-dialog>
 
-          <v-card
-            class="card"
-            style="float: left; width: 320px;"
-            elevation="7"
-            v-for="(v, k) in node.op"
-            :key="k"
-          >
-            <div style="height: 80px;">
-              <img style="float: left;" :src="`/assets/avatars/${k}.png`" height="80" width="80">
-              <div style="height: 80px; float: left; padding: 16px;">
-                <span style="font-size: 20px;">{{ v.name }}</span>
-                <br>
-                <img :src="`/assets/common/rarity_${v.rarity}.png`">
+          <div class="d-flex justify-space-around flex-wrap">
+            <v-card
+              class="card"
+              style="width: 320px; height: 185px;"
+              elevation="7"
+              v-for="(v, k) in node.op"
+              :key="k"
+            >
+              <div style="height: 80px;">
+                <img style="float: left;" :src="`/assets/avatars/${k}.png`" height="80" width="80">
+                <div style="height: 80px; float: left; padding: 16px;">
+                  <span style="font-size: 20px;">{{ v.name }}</span>
+                  <br>
+                  <img :src="`/assets/common/rarity_${v.rarity}.png`">
+                </div>
+                <v-menu offset-y>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                      icon
+                      style="float: right; margin-top: 16px;"
+
+                      v-bind="attrs"
+                      v-on="on"
+                    >
+                      <v-icon>mdi-menu</v-icon>
+                    </v-btn>
+                  </template>
+                  <v-list dense>
+                    <v-list-item link @click="moveOp(k)">
+                      <v-list-item-title>移动至另一目标</v-list-item-title>
+                    </v-list-item>
+                    <v-list-item link @click="deleteOp(k)">
+                      <v-list-item-title>删除</v-list-item-title>
+                    </v-list-item>
+                  </v-list>
+                </v-menu>
               </div>
-              <v-btn
-                color="error"
-                style="float: right; margin-top: 16px;"
-                @click="deleteOp(k)"
-              >
-                <v-icon>mdi-delete-outline</v-icon>
-                删除
-              </v-btn>
-            </div>
-            <v-divider></v-divider>
-            <div style="height: 80px; padding: 8px;" v-ripple @click="showOp(k)">
-              <div style="height: 80px; float: left; padding-top: 16px;">
-                <img style="float: left;" height="40" :src="`/assets/common/elite_${v.phase}.png`">
-                <div style="height: 40px; line-height: 50px; float: left; font-size: 24px;">
-                  {{ v.level }}
+              <v-divider></v-divider>
+              <div style="height: 80px; padding: 8px;" v-ripple @click="showOp(k)">
+                <div style="height: 80px; float: left; padding-top: 16px;">
+                  <img style="float: left;" height="40" :src="`/assets/common/elite_${v.phase}.png`">
+                  <div style="height: 40px; line-height: 50px; float: left; font-size: 24px;">
+                    {{ v.level }}
+                  </div>
+                </div>
+                <div style="position: relative; height: 80px; float: left; margin-left: 8px; padding-top: 12px;" v-for="(s, i) in data.character[k].skills" :key="s.skillId">
+                  <img :src="`/assets/skills/skill_icon_${s.skillId}.png`" height="56" width="56">
+                  <img v-if="v.skill[i]" class="rank-pic" :src="`/assets/common/evolve_${v.skill[i]}.png`" height="24" width="24">
+                  <div class="rank" v-else>
+                    {{ v.allSkill + v.skill[i] }}
+                  </div>
                 </div>
               </div>
-              <div style="position: relative; height: 80px; float: left; margin-left: 8px; padding-top: 12px;" v-for="(s, i) in data.character[k].skills" :key="s.skillId">
-                <img :src="`/assets/skills/skill_icon_${s.skillId}.png`" height="56" width="56">
-                <img v-if="v.skill[i]" class="rank-pic" :src="`/assets/common/evolve_${v.skill[i]}.png`" height="24" width="24">
-                <div class="rank" v-else>
-                  {{ v.allSkill + v.skill[i] }}
-                </div>
-              </div>
-            </div>
-          </v-card>
+            </v-card>
+            <i style="margin: 0 8px; width: 320px;"></i>
+            <i style="margin: 0 8px; width: 320px;"></i>
+            <i style="margin: 0 8px; width: 320px;"></i>
+            <i style="margin: 0 8px; width: 320px;"></i>
+          </div>
+          
         </div>
       </v-card>
     </v-dialog>
 
+    <!--编辑干员练度-->
     <v-dialog
       v-model="edit.show"
       width="400"
@@ -221,6 +263,46 @@
       </v-card>
     </v-dialog>
 
+    <!--移动干员-->
+    <v-dialog
+      v-model="move.show"
+      width="400"
+    >
+      <v-card>
+        <v-card-title>
+          移动干员 {{ emptify(node.op[move.id]).name }}
+        </v-card-title>
+        <v-card-text>
+          <p>注意：若移动目标含有相同干员，将会进行覆盖</p>
+          <v-select
+            :items="selectNodes"
+            label="移动至"
+            outlined
+            v-model="move.to"
+            item-text="name"
+            item-value="key"
+          ></v-select>
+        </v-card-text>
+        <v-divider></v-divider>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            text
+            @click="move.show = false"
+          >
+            取消
+          </v-btn>
+          <v-btn
+            color="primary"
+            text
+            @click="moveOp(false)"
+          >
+            确定
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
   </div>
 </template>
 
@@ -245,18 +327,36 @@
     left: 40px;
     top: 2px;
   }
+
+  .drag {
+    padding: 8px;
+  }
+
+  .drag-item {
+    width: 300px;
+    margin: 8px;
+    cursor: pointer;
+    float: left;
+  }
+
+  .drag-ghost {
+    opacity: 0.5;
+  }
 </style>
 
 <script>
 const LS = window.localStorage
 
+import draggable from 'vuedraggable'
 import NumberSelecter from '../components/NumberSelecter.vue'
+
 import data from '../data.js'
 import core from '../core'
 
 export default {
   components: {
-    NumberSelecter
+    NumberSelecter,
+    draggable
   },
   data() {
     return {
@@ -265,6 +365,14 @@ export default {
 
       show: false,
       nodeId: 0,
+
+      drag: {
+        drag: false,
+        options: {
+          animation: 200,
+          ghostClass: 'drag-ghost'
+        }
+      },
 
       add: {
         show: false,
@@ -285,6 +393,11 @@ export default {
           cost: { 4001: 0, 0: 0 }
         }
       },
+      move: {
+        show: false,
+        id: '',
+        to: 0
+      },
 
       emptify: (v) => v ? v : {}
     }
@@ -292,51 +405,59 @@ export default {
   computed: {
     node() {
       return this.plan[this.nodeId]
-    }
+    },
+    selectNodes() {
+      return this.plan.map((v, k) => {
+         return { name: v.name, key: k }
+      })
+    },
   },
   methods: {
-    showNode(id) {
+    save() { // 保存
+      LS.plan = JSON.stringify(this.plan)
+    },
+    showNode(id) { // 展示节点详情
       this.nodeId = id
       this.show = true
     },
     renameNode() {
       if (this.nodeId === 0) {
-        window.mdui.alert('无法重命名当前练度节点')
+        window.mdui.alert('无法重命名“当前练度”')
         return
       }
       let onConfirm = (v) => {
         if (v === '') {
-          window.mdui.alert('请输入新节点名称')
+          window.mdui.alert('请输入新名称')
           return
         }
-        this.plan[this.nodeId].name = v
-        LS.plan = JSON.stringify(this.plan)
+        this.node.name = v
+        this.save()
       }
       window.mdui.prompt(
         '新名字',
-        `重命名节点${this.node.name}`,
+        `重命名${this.node.name}`,
         onConfirm
       )
     },
     addNode() {
       let onConfirm = (v) => {
         if (v === '') {
-          window.mdui.alert('请输入新节点名称')
+          window.mdui.alert('请输入新目标名称')
           return
         }
         this.plan.splice(this.plan.length, 0, { name: v, op: {} })
-        LS.plan = JSON.stringify(this.plan)
+        this.save()
         this.show = false
       }
       window.mdui.prompt(
-        '新节点名字',
-        `新建节点`,
+        '新目标名称',
+        `新建目标`,
         onConfirm
       )
     },
     deleteNode() {
       if (this.nodeId === 0) {
-        window.mdui.alert('无法删除当前练度节点')
+        window.mdui.alert('无法删除“当前练度”')
         return
       }
       let onConfirm = () => {
@@ -344,9 +465,9 @@ export default {
         let t = this.nodeId
         this.nodeId = 0
         this.plan.splice(t, 1)
-        LS.plan = JSON.stringify(this.plan)
+        this.save()
       }
-      window.mdui.confirm('操作不可恢复', '确认删除节点？', onConfirm)
+      window.mdui.confirm('操作不可恢复', '确认删除目标？', onConfirm)
     },
     addOp() {
       this.add.show = false
@@ -356,36 +477,71 @@ export default {
         window.mdui.alert('干员已存在')
         return
       }
-      let char = data.character[opid]
-      this.plan[this.nodeId].op[opid] = {
-        id: opid,
-        name: char.name,
-        rarity: char.rarity,
-        level: 1,
-        phase: 0,
-        allSkill: 1,
-        skill: [0, 0, 0],
-        cost: { 4001: 0, 0: 0 }
+      if (this.plan[0].op[opid]) {
+        this.node.op[opid] = JSON.parse(JSON.stringify(this.plan[0].op[opid]))
+      } else {
+        let char = data.character[opid]
+        this.node.op[opid] = {
+          id: opid,
+          name: char.name,
+          rarity: char.rarity,
+          level: 1,
+          phase: 0,
+          allSkill: 1,
+          skill: [0, 0, 0],
+          cost: { 4001: 0, 0: 0 }
+        }
       }
-      LS.plan = JSON.stringify(this.plan)
+      this.save()
     },
     deleteOp(id) {
       let onConfirm = () => {
-        // delete this.plan[this.nodeId].op[id]
-        this.$delete(this.plan[this.nodeId].op,id)
-        LS.plan = JSON.stringify(this.plan)
+        this.$delete(this.node.op, id)
+        this.save()
       }
       window.mdui.confirm('操作不可恢复', '确认删除干员？', onConfirm)
     },
+    moveOp(id) {
+      if (id) {
+        this.move.id = id
+        this.move.to = 0
+        this.move.show = true
+      } else {
+        if (this.plan[this.move.to].op[this.move.id]) {
+          this.plan[this.move.to].op[this.move.id] = this.node.op[this.move.id]
+        } else {
+          this.$set(this.plan[this.move.to].op, this.move.id, this.node.op[this.move.id])
+        }
+        this.$delete(this.node.op, this.move.id)
+        this.save()
+        this.move.show = false
+      }
+    },
     showOp(id) {
       this.edit.id = id
-      this.edit.op = JSON.parse(JSON.stringify(this.plan[this.nodeId].op[id]))
+      this.edit.op = JSON.parse(JSON.stringify(this.node.op[id]))
       this.edit.show = true
     },
     editOp() {
-      this.plan[this.nodeId].op[this.edit.id] = this.edit.op
-      this.plan[this.nodeId].op[this.edit.id].cost = core.op.getCost(this.edit.op)
-      LS.plan = JSON.stringify(this.plan)
+      // 比较this.edit.op 和 this.plan[0].op[this.edit.id]
+      let now = this.plan[0].op[this.edit.id]
+      let next = this.edit.op
+      if (
+        now && this.nodeId !== 0 && (
+          next.phase < now.phase ||
+          (next.phase === now.phase && next.level < now.level) ||
+          next.allSkill < now.allSkill ||
+          next.skill[0] < now.skill[0] ||
+          next.skill[1] < now.skill[1] ||
+          next.skill[2] < now.skill[2]
+        )
+      ) {
+        window.mdui.alert('修改失败！练度不得低于当前练度')
+        return
+      }
+      this.node.op[this.edit.id] = this.edit.op
+      this.node.op[this.edit.id].cost = core.op.getCost(this.edit.op)
+      this.save()
       this.edit.show = false
     }
   }

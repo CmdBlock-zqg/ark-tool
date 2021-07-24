@@ -3,7 +3,7 @@
     <div style="width: 240px;">
       <v-select
         :items="selectItems"
-        label="目标节点"
+        label="目标"
         outlined
         v-model="node"
         item-text="name"
@@ -261,7 +261,7 @@ export default {
         t[k] = t[k] ? t[k] + v : v
       }
       let num = (k) => k ? k : 0
-      let asc = { 32001: 0 }
+      let asc = {}
       
       for (let i of Object.keys(this.cost.asc)) {
         if (i[3] === '3') { // 双芯片
@@ -294,6 +294,7 @@ export default {
       } else {
         asc = core.mtl.minus(asc, this.left.asc)
       }
+      if (!asc[32001]) asc[32001] = 0
       let intel = 0
       let stage = { 1: {}, 2: {}}
       const pair = {
