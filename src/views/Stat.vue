@@ -239,7 +239,7 @@ export default {
       res.exp[0] = cost[0]
       res.exp[1] = mtl.exp[2001] * 200 + mtl.exp[2002] * 400 + mtl.exp[2003] * 1000 + mtl.exp[2004] * 2000
 
-      res.gold = cost[4001] - mtl.gold[4001]
+      res.gold = Math.max(0, cost[4001] - mtl.gold[4001])
 
       return res
     },
@@ -261,7 +261,7 @@ export default {
         t[k] = t[k] ? t[k] + v : v
       }
       let num = (k) => k ? k : 0
-      let asc = {}
+      let asc = { 32001: 0 }
       
       for (let i of Object.keys(this.cost.asc)) {
         if (i[3] === '3') { // 双芯片
