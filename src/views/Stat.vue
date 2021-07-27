@@ -2,16 +2,16 @@
   <div class="stat">
     <div style="width: 240px;">
       <v-select
-        :items="selectItems"
+        :items="nodeSelectItems"
         label="目标"
         outlined
-        v-model="node"
+        v-model="nodeId"
         item-text="name"
         item-value="key"
         dense
       ></v-select>
     </div>
-    <template v-if="node !== 0">
+    <template v-if="nodeId !== 0">
       <v-tabs v-model="tab">
         <v-tab>总览</v-tab>
         <v-tab>经验货币</v-tab>
@@ -19,41 +19,117 @@
         <v-tab>技巧概要</v-tab>
         <v-tab>精英材料</v-tab>
       </v-tabs>
-
       <v-tabs-items v-model="tab">
         <div style="padding: 8px;">
-          <v-tab-item> <!--总览-->
+          <!--总览-->
+          <v-tab-item>
             <v-switch
-              v-model="mc"
+              v-model="monthCard"
               label="月卡"
               style="padding: 0;"
             ></v-switch>
-            <b>目前因为精英材料统计未完成 未算入刷取精英材料的理智</b><br>
-            需要的理智总和：{{ totAp }}<br>
-            自然回复理智等价天数：{{ Math.ceil(totAp / (mc ? 300 : 240)) }}<br>
-            计算每周奖励理智夜，等价周数：{{ Math.ceil(totAp / (mc ? 2300 : 1880)) }}<br>
+            <b>目前因为精英材料统计未完成 未算入刷取精英材料的理智</b>
+            <v-simple-table dense>
+              <template v-slot:default>
+                <thead>
+                  <tr>
+                    <th>
+                      项目
+                    </th>
+                    <th>
+                      数值
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>需要理智总和</td>
+                    <td>{{ viewTot.lz }}</td>
+                  </tr>
+                  <tr>
+                    <td>自然回复理智等价天数</td>
+                    <td>{{ viewTot.day }}</td>
+                  </tr>
+                  <tr>
+                    <td>计算每周奖励理智夜，等价周数</td>
+                    <td>{{ viewTot.week }}</td>
+                  </tr>
+                </tbody>
+              </template>
+            </v-simple-table>
           </v-tab-item>
-          <v-tab-item> <!--经验货币-->
-            还需龙门币：{{ cost.gold }}<br>
-            刷CE-5次数：{{ Math.ceil(cost.gold / 7500) }}<br>
-            预计消耗理智：{{ Math.ceil(cost.gold / 7500) * 30 }}<br>
-            <br>
-
-            总需经验：{{ cost.exp[0] }}<br>
-            已有作战记录总经验：{{ cost.exp[1] }}<br>
-            还需经验：{{ Math.max(0, cost.exp[0] - cost.exp[1]) }}<br>
-            刷LS-5次数：{{ Math.max(0, Math.ceil((cost.exp[0] - cost.exp[1]) / 7400)) }}<br>
-            预计消耗理智：{{ Math.max(0, Math.ceil((cost.exp[0] - cost.exp[1]) / 7400) * 30) }}<br>
+          <!--经验货币-->
+          <v-tab-item>
+            <v-simple-table dense>
+              <template v-slot:default>
+                <thead>
+                  <tr>
+                    <th>
+                      项目
+                    </th>
+                    <th>
+                      数值
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>还需龙门币</td>
+                    <td>{{ viewExpGold.gold.lack }}</td>
+                  </tr>
+                  <tr>
+                    <td>刷CE-5次数</td>
+                    <td>{{ viewExpGold.gold.ce5 }}</td>
+                  </tr>
+                  <tr>
+                    <td>预计消耗理智</td>
+                    <td>{{ viewExpGold.gold.lz }}</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>总需经验</td>
+                    <td>{{ viewExpGold.exp.tot }}</td>
+                  </tr>
+                  <tr>
+                    <td>已有作战记录总经验</td>
+                    <td>{{ viewExpGold.exp.have }}</td>
+                  </tr>
+                  <tr>
+                    <td>还需经验</td>
+                    <td>{{ viewExpGold.exp.lack }}</td>
+                  </tr>
+                  <tr>
+                    <td>刷LS-5次数</td>
+                    <td>{{ viewExpGold.exp.ls5 }}</td>
+                  </tr>
+                  <tr>
+                    <td>预计消耗理智</td>
+                    <td>{{ viewExpGold.exp.lz }}</td>
+                  </tr>
+                </tbody>
+              </template>
+            </v-simple-table>
           </v-tab-item>
-          <v-tab-item> <!--芯片-->
+          <!--芯片-->
+          <v-tab-item>
             <v-switch
-              v-model="ascf"
+              v-model="ascAutoForm"
               label="自动芯片间合成"
               style="padding: 0;"
             ></v-switch>
-            计算中自动制造双芯片，关卡计算假设等概率<br>
+            计算中自动制造双芯片，芯片搜索关卡计算时假设两种芯片等概率掉落<br>
             <div class="d-flex justify-start flex-wrap">
-              <v-card class="item" :class="[`t${data.item[k].rarity}`, `order-${4 - data.item[k].rarity}`]" elevation="3" v-for="(v, k) in asc.asc" :key="k">
+              <v-card
+                class="item"
+                :class="[`t${data.item[k].rarity}`, `order-${4 - data.item[k].rarity}`]"
+                elevation="3"
+                
+                v-for="(v, k) in viewAsc.mtl"
+                :key="k"
+              >
                 <img
                   :src="`/assets/items/${data.item[k].icon}.png`"
                   height="80" width="80"
@@ -62,44 +138,106 @@
                 <div class="text-center">{{ v }}</div>
               </v-card>
             </div>
-
-            <template v-for="(v, k) in asc.stage[1]">
-              {{ k }}：{{ v }}次<br :key="k">
-            </template>
-            <br>
-            <template v-for="(v, k) in asc.stage[2]">
-              {{ k }}：{{ v }}次<br :key="k">
-            </template>
-            <br>
-            AP-5：{{ Math.ceil(asc.asc[32001] * 4.5) }} 次<br>
-            <br>
-            预计消耗理智：{{ asc.intel + Math.ceil(asc.asc[32001] * 4.5) * 30 }}
+            <v-simple-table dense>
+              <template v-slot:default>
+                <thead>
+                  <tr>
+                    <th>
+                      项目
+                    </th>
+                    <th>
+                      数值
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(v, k) in viewAsc.stage[1]" :key="k">
+                    <td>{{ k }} 次数</td>
+                    <td>{{ v }}</td>
+                  </tr>
+                  <tr><td></td><td></td></tr>
+                  <tr v-for="(v, k) in viewAsc.stage[2]" :key="k">
+                    <td>{{ k }} 次数</td>
+                    <td>{{ v }}</td>
+                  </tr>
+                  <tr><td></td><td></td></tr>
+                  <tr>
+                    <td>AP-5 次数</td>
+                    <td>{{ viewAsc.ap5 }}</td>
+                  </tr>
+                  <tr>
+                    <td>预计消耗理智</td>
+                    <td>{{ viewAsc.lz }}</td>
+                  </tr>
+                </tbody>
+              </template>
+            </v-simple-table>
           </v-tab-item>
-          <v-tab-item> <!--技巧概要-->
+          <!--技巧概要-->
+          <v-tab-item>
             因技巧概要获取难以计算，此处仅计算 技巧概要·卷3 的刷取
             <div class="d-flex justify-start flex-wrap">
-              <v-card class="item" :class="[`t${data.item[k].rarity}`, `order-${4 - data.item[k].rarity}`]" elevation="3" v-for="(v, k) in cost.skill" :key="k">
+              <v-card
+                class="item"
+                :class="[`t${data.item[id].rarity}`, `order-${4 - data.item[id].rarity}`]"
+                elevation="3"
+                
+                v-for="id in data.mtlMap.skill"
+                :key="id"
+                v-show="lack[id]"
+              >
                 <img
-                  :src="`/assets/items/${data.item[k].icon}.png`"
+                  :src="`/assets/items/${data.item[id].icon}.png`"
                   height="80" width="80"
                 >
-                <div class="text-center">{{ data.item[k].name }}</div>
-                <div class="text-center">{{ v }}</div>
+                <div class="text-center">{{ data.item[id].name }}</div>
+                <div class="text-center">{{ lack[id] }}</div>
               </v-card>
             </div>
-            刷CA-5次数：{{ Math.ceil((cost.skill[3303] ? cost.skill[3303] : 0) / 2) }}<br>
-            预计消耗理智：{{ Math.ceil((cost.skill[3303] ? cost.skill[3303] : 0) / 2) * 30 }}
+            <v-simple-table dense>
+              <template v-slot:default>
+                <thead>
+                  <tr>
+                    <th>
+                      项目
+                    </th>
+                    <th>
+                      数值
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>CA-5 次数</td>
+                    <td>{{ viewSkill.ca5 }}</td>
+                  </tr>
+                  <tr>
+                    <td>预计消耗理智</td>
+                    <td>{{ viewSkill.lz }}</td>
+                  </tr>
+                </tbody>
+              </template>
+            </v-simple-table>
           </v-tab-item>
-          <v-tab-item> <!--精英材料-->
-          关卡刷取计算还没做
+          <!--精英材料-->
+          <v-tab-item>
+            关卡刷取计算还没做
             <div class="d-flex justify-start flex-wrap">
-              <v-card class="item" :class="[`t${data.item[k].rarity}`, `order-${4 - data.item[k].rarity}`]" elevation="3" v-for="(v, k) in cost.sl" :key="k">
+              <v-card
+                class="item"
+                :class="[`t${data.item[id].rarity}`, `order-${4 - data.item[id].rarity}`]"
+                elevation="3"
+                
+                v-for="id in data.mtlMap.sl"
+                :key="id"
+                v-show="lack[id]"
+              >
                 <img
-                  :src="`/assets/items/${data.item[k].icon}.png`"
+                  :src="`/assets/items/${data.item[id].icon}.png`"
                   height="80" width="80"
                 >
-                <div class="text-center">{{ data.item[k].name }}</div>
-                <div class="text-center">{{ v }}</div>
+                <div class="text-center">{{ data.item[id].name }}</div>
+                <div class="text-center">{{ lack[id] }}</div>
               </v-card>
             </div>
           </v-tab-item>
@@ -140,7 +278,7 @@ var mtl
 var plan
 
 import data from '../data.js'
-import core from '../core'
+import core from '../core.js'
 
 export default {
   data() {
@@ -148,13 +286,11 @@ export default {
       data,
       mtl,
       plan,
-
-      node: 0,
-
+      nodeId: 0,
       tab: 0,
-      ascf: false,
-      skf: false,
-      mc: true
+
+      ascAutoForm: false,
+      monthCard: true
     }
   },
   beforeCreate() {
@@ -162,119 +298,87 @@ export default {
     plan = JSON.parse(LS.plan)
   },
   computed: {
-    selectItems() {
-      let res = this.plan.map((v, k) => {
+    node() {
+      return plan[this.nodeId]
+    },
+    nodeSelectItems() {
+      let res = plan.map((v, k) => {
          return { name: v.name, key: k }
       })
       res.splice(0, 1)
       return res
     },
-    totCost() { // 总共需要
+    cost() { // 所需要的全部素材
       let l = plan[0].op
-      let r = plan[this.node].op
+      let r = this.node.op
       let cost = { 0: 0, 4001: 0 }
       for (let i of Object.keys(r)) {
         if (!l[i]) {
-          cost = core.mtl.plus(
+          cost = core.mtl.merge(
             cost,
             r[i].cost
           )
         } else {
-          cost = core.mtl.plus(
+          cost = core.mtl.merge(
             cost, 
-            core.mtl.minus(
+            core.mtl.lack(
               r[i].cost,
               l[i].cost
             )
           )
         }
       }
-      let res = {
-        sl: {},
-        asc: {},
-        skill: {}
-      }
-      for (let t of Object.keys(res)) { // t: item分类
-        for (let i of Object.keys(mtl[t])) { // i: 遍历分类下的所有item
-          if (!cost[i]) continue
-          res[t][i] = cost[i]
-        }
-      }
-      res.exp = cost[0]
-      res.gold =  cost[4001]
-      return res
+      return cost
     },
-    cost() { // 排除仓库后需要
-      let l = plan[0].op
-      let r = plan[this.node].op
-      let cost = { 0: 0, 4001: 0 }
-      for (let i of Object.keys(r)) {
-        if (!l[i]) {
-          cost = core.mtl.plus(
-            cost,
-            r[i].cost
-          )
-        } else {
-          cost = core.mtl.plus(
-            cost, 
-            core.mtl.minus(
-              r[i].cost,
-              l[i].cost
-            )
-          )
-        }
-      }
+    lack() { // 排除仓库后还缺
+      return core.mtl.lack(this.cost, mtl)
+    },
+    left() { // 排除仓库后 仓库剩余
+      return core.mtl.left(this.cost, mtl)
+    },
+    viewExpGold() { // 经验货币
       let res = {
-        sl: {},
-        asc: {},
-        skill: {}
-      }
-      for (let t of Object.keys(res)) { // t: item分类
-        for (let i of Object.keys(mtl[t])) { // i: 遍历分类下的所有item
-          if (!cost[i]) continue
-          if (cost[i] > mtl[t][i]) res[t][i] = cost[i] - mtl[t][i]
+        gold: {
+          lack: this.lack[4001] // 缺少龙门币数量
+        },
+        exp: {
+          tot: this.cost[0], // 需要的总经验
+          have: mtl[2001] * 200 + mtl[2002] * 400 + mtl[2003] * 1000 + mtl[2004] * 2000 // 作战记录exp总和
         }
       }
-      res.exp = mtl.exp
-      res.exp[0] = cost[0]
-      res.exp[1] = mtl.exp[2001] * 200 + mtl.exp[2002] * 400 + mtl.exp[2003] * 1000 + mtl.exp[2004] * 2000
+      res.gold.ce5 = Math.ceil(res.gold.lack / 7500) // ce5次数
+      res.gold.lz = res.gold.ce5 * 30 // 预计刷龙门币耗费理智
 
-      res.gold = Math.max(0, cost[4001] - mtl.gold[4001])
-
+      res.exp.lack = Math.max(0, res.exp.tot - res.exp.have) // 缺少经验值
+      res.exp.ls5 = Math.ceil(res.exp.lack / 7400) // ls5次数
+      res.exp.lz = res.exp.ls5 * 30 // 预计刷狗粮耗费理智
       return res
     },
-    left() { // 排除仓库后，仓库剩下
-      let res = {
-        sl: {},
-        asc: {},
-        skill: {}
-      }
-      for (let t of Object.keys(res)) { // t: item分类
-        for (let i of Object.keys(mtl[t])) { // i: 遍历分类下的所有item
-          res[t][i] = Math.max(0, mtl[t][i] - (this.totCost[t][i] ? this.totCost[t][i] : 0))
-        }
-      }
-      return res
-    },
-    asc() {
+    viewAsc() { // 芯片
       let add = (t, k, v) => {
         t[k] = t[k] ? t[k] + v : v
       }
       let num = (k) => k ? k : 0
-      let asc = {}
-      
-      for (let i of Object.keys(this.cost.asc)) {
-        if (i[3] === '3') { // 双芯片
-          add(asc, i - 1, 2 * this.cost.asc[i])
-          add(asc, 32001, this.cost.asc[i])
+      let res = {
+        mtl: {},
+        stage: { 1: {}, 2: {} }, // 单芯片和双芯片
+        lz: 0,
+        ap5: 0,
+      }
+      for (let i of data.mtlMap.asc) {
+        if (!this.lack[i]) continue
+        if (i[3] === '3') { // 双芯片 拆成芯片组和助剂
+          add(res.mtl, i - 1, 2 * this.lack[i]) // 芯片组
+          add(res.mtl, 32001, this.lack[i]) // 助剂
         } else {
-          add(asc, i, this.cost.asc[i])
+          add(res.mtl, i, this.lack[i])
         }
       }
-      if (this.ascf) {
-        let asct = core.mtl.minus(asc, this.left.asc)
-        let ascl = core.mtl.minusLeft(asc, this.left.asc)
-        const pair = {
+      if (this.ascAutoForm) {
+        // 芯片间自动合成
+        let lack = core.mtl.lack(res.mtl, this.left)
+        let left = core.mtl.left(res.mtl, this.left)
+        const ascIdPair = {
           '1': '7',
           '2': '8',
           '3': '6',
@@ -284,65 +388,89 @@ export default {
           '7': '1',
           '8': '2'
         }
-        for (let i of Object.keys(asct)) {
+        for (let i of Object.keys(lack)) {
           if (i === '32001') continue
-          let j = '32' + pair[i[2]] + i[3]
-          let k = Math.floor(num(ascl[j]) / 3)
-          asct[i] = Math.max(0, asct[i] - k * 2)
+          let j = '32' + ascIdPair[i[2]] + i[3] // 同等级同关卡的另一种芯片id
+          let k = Math.floor(num(left[j]) / 3) * 2 // 最多合成i的数量
+          lack[i] = Math.max(0, lack[i] - k)
         }
-        asc = asct
+        res.mtl = lack
       } else {
-        asc = core.mtl.minus(asc, this.left.asc)
+        // 不自动合成 自动消耗拆开双芯片后的所需材料
+        res.mtl = core.mtl.lack(res.mtl, this.left)
       }
-      if (!asc[32001]) asc[32001] = 0
-      let intel = 0
-      let stage = { 1: {}, 2: {}}
-      const pair = {
-        1: {
+      if (res.mtl[32001]) {
+        res.ap5 = Math.ceil(res.mtl[32001] * 4.5)
+        res.lz += res.ap5 * 30
+      }
+      const stages = { // 关卡名和掉落的材料
+        1: { // 芯片
           'PR-A-1(医疗重装)': [3261, 3231],
           'PR-B-1(狙击术师)': [3241, 3251],
           'PR-C-1(先锋辅助)': [3211, 3271],
           'PR-D-1(近卫特种)': [3221, 3281]
         },
-        2: {
+        2: { // 芯片组
           'PR-A-2(医疗重装)': [3262, 3232],
           'PR-B-2(狙击术师)': [3242, 3252],
           'PR-C-2(先锋辅助)': [3212, 3272],
           'PR-D-2(近卫特种)': [3222, 3282]
         }
       }
-      for (let i of Object.keys(pair)) {
-        for (let j of Object.keys(pair[i])) {
-          let a = num(asc[pair[i][j][0]]), 
-              b = num(asc[pair[i][j][1]])
+      for (let i of Object.keys(stages)) { // i：芯片等级
+        for (let j of Object.keys(stages[i])) { // j: 关卡名
+          let a = num(res.mtl[stages[i][j][0]]), // 两种职业的芯片各自的编号
+              b = num(res.mtl[stages[i][j][1]])
           let tmp = Math.min(a, b)
-          if (this.ascf) {
+          if (this.ascAutoForm) {
             let cx = [0, 2, 4, 6, 6, 6]
             let ax = Math.floor((a - tmp) / 5),
                 bx = Math.floor((b - tmp) / 5)
-            stage[i][j] = tmp * 2 + ax * 6 + cx[a - tmp - ax * 5] + bx * 6 + cx[b - tmp - bx * 5]
+            res.stage[i][j] = tmp * 2 + ax * 6 + cx[a - tmp - ax * 5] + bx * 6 + cx[b - tmp - bx * 5]
           } else {
-            stage[i][j] = tmp * 2 + (a - tmp) * 2 + (b - tmp) * 2
+            res.stage[i][j] = tmp * 2 + (a - tmp) * 2 + (b - tmp) * 2
           }
-          intel += i * 18 * stage[i][j]
-          if (stage[i][j] === 0) delete stage[i][j]
+          res.lz += i * 18 * res.stage[i][j]
+          if (res.stage[i][j] === 0) delete res.stage[i][j]
         }
       }
-
-      return {
-        asc,
-        intel,
-        stage
-      }
+      return res
     },
-    totAp() {
-      return Math.ceil(this.cost.gold / 7500) * 30 + 
-             Math.max(0, Math.ceil((this.cost.exp[0] - this.cost.exp[1]) / 7400) * 30) + 
-             this.asc.intel + Math.ceil(this.asc.asc[32001] * 4.5) * 30 +
-             Math.ceil((this.cost.skill[3303] ? this.cost.skill[3303] : 0) / 2) * 30
+    viewSkill() { // 技巧概要
+      let res = {
+        ca5: 0,
+        lz: 0
+      }
+      let sk = this.lack[3303] ? this.lack[3303] : 0 // 缺少三级技能书的数量
+      res.ca5 = Math.ceil(sk / 2)
+      res.lz = res.ca5 * 30
+      return res
+    },
+    viewSl() { // 精英材料
+      let res = {
+        lz: 0
+      }
+      return res
+    },
+    viewTot() { // 总览
+      let res = {
+        lz: this.viewExpGold.gold.lz +
+            this.viewExpGold.exp.lz + 
+            this.viewAsc.lz +
+            this.viewSkill.lz +
+            this.viewSl.lz,
+        day: 0,
+        week: 0
+      }
+      if (this.monthCard) {
+        res.day = Math.ceil(res.lz / 300)
+        res.week = Math.ceil(res.lz / 2300)
+      } else {
+        res.day = Math.ceil(res.lz / 240)
+        res.week = Math.ceil(res.lz / 1880)
+      }
+      return res
     }
-  },
-  methods: {
   }
 }
 </script>

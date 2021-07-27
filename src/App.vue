@@ -117,18 +117,11 @@ export default {
       op: {}
     }])
     if (!LS.mtl) {
-      let mtl = {
-        sl: {},
-        asc: {},
-        skill: {},
-        exp: {},
-        gold: { 4001: 0 }
-      }
-      for (let i of Object.keys(data.item)) {
-        if (data.item[i].icon.indexOf('MTL_SL') === 0) mtl.sl[i] = 0
-        if (data.item[i].icon.indexOf('MTL_ASC') === 0) mtl.asc[i] = 0
-        if (data.item[i].icon.indexOf('MTL_SKILL') === 0) mtl.skill[i] = 0
-        if (data.item[i].icon.indexOf('sprite_exp_card') === 0) mtl.exp[i] = 0
+      let mtl = {}
+      for (let i of Object.keys(data.mtlMap)) {
+        for (let j of data.mtlMap[i]) {
+          mtl[j] = 0
+        }
       }
       LS.mtl = JSON.stringify(mtl)
     }

@@ -1,4 +1,4 @@
-import data from '../data.js'
+import data from './data.js'
 
 /*
 计算从初始等级到给出等级的消耗
@@ -49,7 +49,7 @@ let getCost = (op) => {
 /*
 计算c1 - c2
 */
-let minus = (c1, c2) => {
+let lack = (c1, c2) => {
   let res = {}
   for (let i of Object.keys(c1)) {
     if (c2[i]) {
@@ -61,11 +61,17 @@ let minus = (c1, c2) => {
   return res
 }
 
-let minusLeft = (c1, c2) => {
+let left = (c1, c2) => {
   let res = {}
   for (let i of Object.keys(c2)) {
-    if (!c1[i]) res[i] = c2[i]
-    if (c2[i] > c1[i]) res[i] = c2[i] - c1[i]
+    if (!c1[i]) {
+      res[i] = c2[i]
+    }
+    else {
+      if (c2[i] > c1[i]) {
+        res[i] = c2[i] - c1[i]
+      }
+    }
   }
   return res
 }
@@ -73,7 +79,7 @@ let minusLeft = (c1, c2) => {
 /*
 计算c1 + c2
 */
-let plus = (c1, c2) => {
+let merge = (c1, c2) => {
   let res = {}
   for (let i of Object.keys(c1)) {
     res[i] = res[i] ? res[i] + c1[i] : c1[i]
@@ -89,8 +95,8 @@ export default {
     getCost
   },
   mtl: {
-    plus,
-    minus,
-    minusLeft
+    lack,
+    left,
+    merge
   }
 }

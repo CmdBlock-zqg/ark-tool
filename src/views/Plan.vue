@@ -351,7 +351,7 @@ import draggable from 'vuedraggable'
 import NumberSelecter from '../components/NumberSelecter.vue'
 
 import data from '../data.js'
-import core from '../core'
+import core from '../core.js'
 
 export default {
   components: {
@@ -377,7 +377,7 @@ export default {
       add: {
         show: false,
         input: '',
-        opList: Object.keys(data.search),
+        opList: Object.keys(data.opSearch),
       },
       edit: {
         show: false,
@@ -472,7 +472,7 @@ export default {
     addOp() {
       this.add.show = false
       if (!this.add.input) return
-      let opid = data.search[this.add.input]
+      let opid = data.opSearch[this.add.input]
       if (this.node.op[opid]) {
         window.mdui.alert('干员已存在')
         return

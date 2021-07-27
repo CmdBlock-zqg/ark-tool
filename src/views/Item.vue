@@ -20,39 +20,46 @@
         </v-expansion-panel-header>
         <v-expansion-panel-content>
           <div class="d-flex justify-start flex-wrap">
-            <v-card class="item" :class="[`t${data.item[k].rarity}`, `order-${4 - data.item[k].rarity}`]" elevation="3" v-for="(v, k) in mtl[t.type]" :key="k">
+            <v-card
+              class="item"
+              elevation="3"
+              v-for="id in data.mtlMap[t.type]"
+              :key="id"
+
+              :class="[`t${data.item[id].rarity}`, `order-${4 - data.item[id].rarity}`]"
+            >
               <v-menu offset-y>
                 <template v-slot:activator="{ on, attrs }">
                   <img
-                    :src="`/assets/items/${data.item[k].icon}.png`"
+                    :src="`/assets/items/${data.item[id].icon}.png`"
                     height="80" width="80"
                     v-bind="attrs"
                     v-on="on"
                   >
                 </template>
                 <v-list dense>
-                  <v-list-item link @click="openEdit(t.type, k)">
+                  <v-list-item link @click="openEdit(id)">
                     <v-list-item-title>输入数量</v-list-item-title>
                   </v-list-item>
-                  <v-list-item link @click="openForm(t.type, k)">
+                  <v-list-item link @click="openForm(id)" v-if="data.item[id].formula && data.formula[data.item[id].formula].costs.length">
                     <v-list-item-title>合成</v-list-item-title>
                   </v-list-item>
                 </v-list>
               </v-menu>
-              <div class="text-center">{{ data.item[k].name }}</div>
+              <div class="text-center">{{ data.item[id].name }}</div>
               <div class="d-flex justify-space-between">
                 <v-btn
                   elevation="2"
                   icon
                   small
-                  @click="add(t.type, k, -1)"
+                  @click="add(id, -1)"
                 ><v-icon>mdi-minus</v-icon></v-btn>
-                <span style="line-height: 24px;">{{ v }}</span>
+                <span style="line-height: 24px;">{{ mtl[id] }}</span>
                 <v-btn
                   elevation="2"
                   icon
                   small
-                  @click="add(t.type, k, 1)"
+                  @click="add(id, 1)"
                 ><v-icon>mdi-plus</v-icon></v-btn>
               </div>
             </v-card>
@@ -209,14 +216,12 @@ export default {
 
       edit: {
         show: false,
-        type: 'asc',
         id: '32001',
         num: 0
       },
 
       form: {
         show: false,
-        type: 'asc',
         formula: {},
         id: '32001',
         num: 0
@@ -227,41 +232,35 @@ export default {
     save() {
       LS.mtl = JSON.stringify(this.mtl)
     },
-    add(t, k, d) {
-      if (this.mtl[t][k] === 0 && d == -1) return
-      this.mtl[t][k] += d
+    add(k, d) {
+      if (this.mtl[k] === 0 && d == -1) return
+      this.mtl[k] += d
       this.save()
     },
-    openEdit(t, k) {
+    openEdit(k) {
       this.edit.id = k
-      this.edit.type = t
-      this.edit.num = this.mtl[t][k]
+      this.edit.num = this.mtl[k]
       this.edit.show = true
     },
     applyEdit() {
       let v = this.edit.num
-      if (v >= 0) this.mtl[this.edit.type][this.edit.id] = Math.floor(v)
+      if (v >= 0) this.mtl[this.edit.id] = Math.floor(v)
       this.save()
       this.edit.show = false
     },
-    openForm(t, k) {
-      if (!data.item[k].formula) {
-        window.mdui.snackbar({ message: '该材料无法合成' })
-        return
-      }
+    openForm(k) {
       this.form.id = k
-      this.form.type = t
       this.form.formula = data.formula[data.item[k].formula]
       this.form.num = 0
       this.form.show = true
     },
     applyForm() {
-      this.form.show = false
       for (let i of this.form.formula.costs) {
-        this.mtl[this.form.type][i.id] -= i.count * this.form.num
+        this.mtl[i.id] -= i.count * this.form.num
       }
-      this.mtl[this.form.type][this.form.id] += this.form.formula.count * this.form.num
+      this.mtl[this.form.id] += this.form.formula.count * this.form.num
       this.save()
+      this.form.show = false
     },
     formAdd(k) {// -1, 1, -2, 2
       if (k === -2) { // 最少
@@ -271,14 +270,14 @@ export default {
       } else if (k === 1) { // 加一
         let res = Infinity
         for (let i of this.form.formula.costs) {
-          res = Math.min(res, Math.floor(this.mtl[this.form.type][i.id] / i.count))
+          res = Math.min(res, Math.floor(this.mtl[i.id] / i.count))
         }
         if (this.form.num + 1 > res) return
         this.form.num ++
       } else if (k === 2) { // 最多
         let res = Infinity
         for (let i of this.form.formula.costs) {
-          res = Math.min(res, Math.floor(this.mtl[this.form.type][i.id] / i.count))
+          res = Math.min(res, Math.floor(this.mtl[i.id] / i.count))
         }
         this.form.num = res
       }
